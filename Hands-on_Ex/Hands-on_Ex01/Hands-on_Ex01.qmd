@@ -1,6 +1,7 @@
 ---
 title: "Hands-on Exercise 1"
 author: "Sariyanti Hartiono"
+date: last-modified
 ---
 
 # Getting Started
