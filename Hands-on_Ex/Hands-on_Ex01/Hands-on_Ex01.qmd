@@ -21,11 +21,11 @@ The code chunk below imports *exam_data.csv* into R environment by using [*read_
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-## Introducing ggplot
+# Introducing ggplot
 
 ggplot2 is an R package for declaratively creating data-driven graphics based on the Grammar of Graphics, and it is a part of the tidyverse package.
 
-### R Graphics vs ggplot
+## R Graphics vs ggplot
 
 Comparing between R graphics and ggplot
 
@@ -54,7 +54,7 @@ ggplot2 is an implementation of Grammar of Graphics.
 
 **Aesthetics** of a plot are specified in the [`aes()`](https://ggplot2.tidyverse.org/reference/aes.html) function call.
 
-## **Essential Grammatical Elements: Geometric objects**
+## Essential Grammatical Elements: Geometric objects
 
 Geometric objects are the actual marks we put on a plot. Examples include: *geom_point, geom_line, geom_smooth, geom_bar, geom_histogram, geom_polygon, geom_map*.
 
@@ -280,6 +280,7 @@ Themes control elemets of the graph that are not related to the data, such as th
 A list of theme can be found at this [link](https://ggplot2.tidyverse.org/reference/ggtheme.html).
 
 The code chunk below plot a horizontal bar chart using `theme_classic()`.
+
 ```{r}
 ggplot(data=exam_data, 
        aes(x=RACE)) +

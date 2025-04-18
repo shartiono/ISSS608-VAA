@@ -164,12 +164,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#install-and-launching-r-packages" id="toc-install-and-launching-r-packages" class="nav-link" data-scroll-target="#install-and-launching-r-packages">Install and launching R packages</a></li>
   <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data">Importing the data</a></li>
+  </ul></li>
   <li><a href="#introducing-ggplot" id="toc-introducing-ggplot" class="nav-link" data-scroll-target="#introducing-ggplot">Introducing ggplot</a>
   <ul class="collapse">
   <li><a href="#r-graphics-vs-ggplot" id="toc-r-graphics-vs-ggplot" class="nav-link" data-scroll-target="#r-graphics-vs-ggplot">R Graphics vs ggplot</a></li>
-  </ul></li>
   <li><a href="#grammar-of-graphics" id="toc-grammar-of-graphics" class="nav-link" data-scroll-target="#grammar-of-graphics">Grammar of Graphics</a></li>
-  <li><a href="#essential-grammatical-elements-geometric-objects" id="toc-essential-grammatical-elements-geometric-objects" class="nav-link" data-scroll-target="#essential-grammatical-elements-geometric-objects"><strong>Essential Grammatical Elements: Geometric objects</strong></a>
+  <li><a href="#essential-grammatical-elements-geometric-objects" id="toc-essential-grammatical-elements-geometric-objects" class="nav-link" data-scroll-target="#essential-grammatical-elements-geometric-objects">Essential Grammatical Elements: Geometric objects</a>
   <ul class="collapse">
   <li><a href="#geometric-objects-geom_bar" id="toc-geometric-objects-geom_bar" class="nav-link" data-scroll-target="#geometric-objects-geom_bar">Geometric objects: geom_(bar)</a></li>
   <li><a href="#geometric-objects-geom_dotplot" id="toc-geometric-objects-geom_dotplot" class="nav-link" data-scroll-target="#geometric-objects-geom_dotplot">Geometric objects: geom_dotplot()</a></li>
@@ -255,11 +255,12 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 </section>
-<section id="introducing-ggplot" class="level2">
-<h2 class="anchored" data-anchor-id="introducing-ggplot">Introducing ggplot</h2>
+</section>
+<section id="introducing-ggplot" class="level1">
+<h1>Introducing ggplot</h1>
 <p>ggplot2 is an R package for declaratively creating data-driven graphics based on the Grammar of Graphics, and it is a part of the tidyverse package.</p>
-<section id="r-graphics-vs-ggplot" class="level3">
-<h3 class="anchored" data-anchor-id="r-graphics-vs-ggplot">R Graphics vs ggplot</h3>
+<section id="r-graphics-vs-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="r-graphics-vs-ggplot">R Graphics vs ggplot</h2>
 <p>Comparing between R graphics and ggplot</p>
 <p>R Graphics:</p>
 <div class="cell">
@@ -289,7 +290,6 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 </section>
-</section>
 <section id="grammar-of-graphics" class="level2">
 <h2 class="anchored" data-anchor-id="grammar-of-graphics">Grammar of Graphics</h2>
 <p>Grammar of Graphics is a general scheme for data visualization which breaks up graphs into semantic components such as scales and layers.&nbsp;</p>
@@ -297,7 +297,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p><strong>Aesthetics</strong> of a plot are specified in the&nbsp;<a href="https://ggplot2.tidyverse.org/reference/aes.html"><code>aes()</code></a>&nbsp;function call.</p>
 </section>
 <section id="essential-grammatical-elements-geometric-objects" class="level2">
-<h2 class="anchored" data-anchor-id="essential-grammatical-elements-geometric-objects"><strong>Essential Grammatical Elements: Geometric objects</strong></h2>
+<h2 class="anchored" data-anchor-id="essential-grammatical-elements-geometric-objects">Essential Grammatical Elements: Geometric objects</h2>
 <p>Geometric objects are the actual marks we put on a plot. Examples include: <em>geom_point, geom_line, geom_smooth, geom_bar, geom_histogram, geom_polygon, geom_map</em>.</p>
 <p>A plot must have at least 1 geom. For complete list, please refer to <a href="https://ggplot2.tidyverse.org/reference/#section-layer-geoms">here</a>.</p>
 <section id="geometric-objects-geom_bar" class="level3">
