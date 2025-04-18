@@ -15,14 +15,275 @@ pacman::p_load(tidyverse)
 
 ## Importing the data
 
+The code chunk below imports *exam_data.csv* into R environment by using [*read_csv()*](https://readr.tidyverse.org/reference/read_delim.html) function of [**readr**](https://readr.tidyverse.org/) package, which is one of the tidyverse package.
+
 ```{r}
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-# Plotting a simple bar chart
+## Introducing ggplot
+
+ggplot2 is an R package for declaratively creating data-driven graphics based on the Grammar of Graphics, and it is a part of the tidyverse package.
+
+### R Graphics vs ggplot
+
+Comparing between R graphics and ggplot
+
+R Graphics:
 
 ```{r}
-ggplot(data = exam_data,
-       aes(x = RACE)) +
+hist(exam_data$MATHS)
+```
+
+ggplot:
+
+```{r}
+ggplot(data=exam_data, aes(x = MATHS)) +
+  geom_histogram(bins=10, 
+                 boundary = 100,
+                 color="black", 
+                 fill="grey") +
+  ggtitle("Distribution of Maths scores")
+```
+
+## Grammar of Graphics
+
+Grammar of Graphics is a general scheme for data visualization which breaks up graphs into semantic components such as scales and layers. 
+
+ggplot2 is an implementation of Grammar of Graphics.
+
+**Aesthetics** of a plot are specified in the [`aes()`](https://ggplot2.tidyverse.org/reference/aes.html) function call.
+
+## **Essential Grammatical Elements: Geometric objects**
+
+Geometric objects are the actual marks we put on a plot. Examples include: *geom_point, geom_line, geom_smooth, geom_bar, geom_histogram, geom_polygon, geom_map*.
+
+A plot must have at least 1 geom. For complete list, please refer to [here](https://ggplot2.tidyverse.org/reference/#section-layer-geoms).
+
+### Geometric objects: geom\_(bar)
+
+The code chunk below plots a bar chart using ***geom_bar()***
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
   geom_bar()
+```
+
+### Geometric objects: geom_dotplot()
+
+In the code chunk below, [`geom_dotplot()`](https://ggplot2.tidyverse.org/reference/geom_dotplot.html) of ggplot2 is used to plot a dot plot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(binwidth=2.5,         
+               dotsize = 0.5) +      
+  scale_y_continuous(NULL,           
+                     breaks = NULL)  
+```
+
+### Geometric objects: geom_histogram()
+
+geom_histogram() is used to create a histogram
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           fill = GENDER)) +
+  geom_histogram(bins=20, 
+                 color="grey30")
+```
+
+### Geometric Objects: geom-density()
+
+geom-density() computes and plots kernel density estimate, which is a smoothed version of histogram.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS, 
+           colour = GENDER)) +
+  geom_density()
+```
+
+### Geometric Objects: geom-boxplot()
+
+geom_boxplot() displays continuous value list and visualizes 5 summary statistics: median, two hinges and two whiskers, and all outliers.
+
+Notches are used in box plots to help visually assess whether the medians of distributions differ. If the notches do not overlap, this is evidence that the medians are different.
+
+The code chunk below plots the distribution of Maths scores by gender in notched plot instead of boxplot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot(notch=TRUE)       
+```
+
+### Geometric Objects: geom-violin()
+
+geom_violin() plots are comparing multiple data distributions for easier visualization as they are compared side by side.
+
+The code below plot the distribution of Maths score by gender in violin plot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_violin()   
+```
+
+### Geometric Objects: geom-point()
+
+geom_point() is useful for creating scatterplot.
+
+The code chunk below plots a scatterplot showing the Maths and English grades of pupils by using `geom_point()`.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point()            
+```
+
+### Combining geom objects
+
+geom objects can be combined as shown below combining geom_boxplot() and geom_point()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot() +                    
+  geom_point(position="jitter", 
+             size = 0.5)          
+```
+
+#### 
+
+## Essential Grammatical Elements: stat()
+
+The Statistics functions statistically transform data, in a form of summary.
+
+### The stat_summary() method
+
+The code chunk below adds mean values by using [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) function and overriding the default geom.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  stat_summary(geom = "point",       
+               fun = "mean",         
+               colour ="blue",        
+               size=3)                    
+```
+
+### The geom_point() method
+
+The code chunk below adding mean values by using `geom_()` function and overriding the default stat.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun="mean",           
+             colour="red",          
+             size=3)                
+```
+
+### Adding a best fit curve : geom_smooth()
+
+The scatterplot below shows the relationship of Maths and English grades of pupils. The interpretability of the graph can be enhanced by adding a best fit curve.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              linewidth=0.5)
+```
+
+## Essential Grammatical Elements: Facets
+
+Facet generates small trellis plot that each display a different subset of data.
+
+ggplot2 has 2 types of facets: facet_grid() and facet_wrap()
+
+### facet_wrap()
+
+facet_wrap() wraps 1d into 2d panels.
+
+The code chunk below plots a trellis plot using facet_wrap()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_wrap(~ CLASS)
+```
+
+### facet_grid()
+
+facet_grid() forms a matrix of panels defined by row and column facetting variables.
+
+The code chunk below plots a trellis plot using facet_grid()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_grid(~ CLASS)
+```
+
+## Essential Grammatical Elements: Coordinates
+
+The Coordinates functions map the position of objects onto the plane of the plot. There are a number of different possible coordinate systems to use, they are:
+
+-   coord_cartesian
+-   coord_flip
+-   coord_fixed
+-   coord_quickmap
+
+### coord_flip()
+
+The code chunk below flips the horizontal bar into vertical bar chart using coord_flip()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip()
+```
+
+### Changing the y- and x-axis range
+
+The code chunk below fixed both the y-axis and x-axis range from 0-100.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+```
+
+## Essential Grammatical Elements: Themes
+
+Themes control elemets of the graph that are not related to the data, such as the background colour, font size, gridlines and label colours.
+
+A list of theme can be found at this [link](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+
+The code chunk below plot a horizontal bar chart using `theme_classic()`.
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_classic()
 ```
