@@ -89,5 +89,12 @@
     "title": "Hands-on Exercise 1",
     "section": "R Graphics vs ggplot",
     "text": "R Graphics vs ggplot\nComparing between R graphics and ggplot\nR Graphics:\n\nhist(exam_data$MATHS)\n\n\n\n\n\n\n\n\nggplot:\n\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
+    "href": "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html",
+    "title": "Hands-on Exercise 02",
+    "section": "",
+    "text": "Beyond ggplot2 Fundamentals\n\n\n2.1 Getting started\nIn addition to tidyverse, four R packages will be used in this exercise, namely:\n\nggrepel\nggthemes\nhrbrthemes\npatchwork\n\nCode chunk below will be used to check if these packages have been installed and also will load them onto the R environment.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)"
   }
 ]

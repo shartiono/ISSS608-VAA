@@ -1,0 +1,29 @@
+---
+title: "Hands-on Exercise 02"
+author: "Sariyanti Hartiono"
+date: last-modified
+---
+
+# Beyond ggplot2 Fundamentals
+
+# 2.1 Getting started
+
+In addition to tidyverse, four R packages will be used in this exercise, namely:
+
+-   ggrepel
+
+-   ggthemes
+
+-   hrbrthemes
+
+-   patchwork
+
+Code chunk below will be used to check if these packages have been installed and also will load them onto the R environment.
+
+
+```{r}
+pacman::p_load(ggrepel, patchwork, 
+               ggthemes, hrbrthemes,
+               tidyverse) 
+```
+
