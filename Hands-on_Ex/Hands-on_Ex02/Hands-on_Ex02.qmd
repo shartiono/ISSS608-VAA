@@ -456,12 +456,22 @@ p3 + inset_element(p2,
 
 ### 2.5.6 Creating a composite figure by using patchwork and ggtheme
 
-Figure below is created by combining patchwork and theme_economist() of ggthemes package discussed earlier.
+Figure below is created by combining patchwork and theme_classic() of ggthemes package discussed earlier.
 
-```{r, message=FALSE, warning=FALSE}
+::: panel-tabset
+### The Plot
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 patchwork <- (p1 / p2) | p3
-patchwork & theme_economist()
+patchwork & theme_classic()
 ```
+
+### The Code
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+patchwork <- (p1 / p2) | p3
+patchwork & theme_classic()
+```
+::: panel-tabset
+
 
 ## 2.6 Reference
 
