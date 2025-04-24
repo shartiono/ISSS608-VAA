@@ -5,7 +5,7 @@ date-modified: last-modified
 format: html
 ---
 
-# Beyond ggplot2 Fundamentals
+# **Beyond ggplot2 Fundamentals**
 
 ## 2.1 Overview
 
@@ -42,7 +42,7 @@ pacman::p_load(ggrepel, patchwork, ggthemes, hrbrthemes,
 
 The code chunk below imports exam_data.csv into R environment by using [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function of [**readr**](https://readr.tidyverse.org/) package, which is one of the tidyversepackage.
 
-There are a total of seven attributes in the exam_data tibble data frame, with the following types:
+There are seven attributes in the exam_data tibble data frame, with the following types:
 
 -   The categorical attributes are: ID, CLASS, GENDER and RACE.
 
@@ -52,9 +52,9 @@ There are a total of seven attributes in the exam_data tibble data frame, with t
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-## 2.3 Beyond ggplot2 Annotation: ggrepel {.tabset}
+## 2.3 Beyond ggplot2 Annotation: ggrepel
 
-One of the challenges of plotting statistical graph is annotation especially when dealing with large data points, as shown in the example below:
+One of the challenges in plotting statistical graph is annotation especially when dealing with large data points, as shown in the example below:
 
 ::: panel-tabset
 ### The Plot
@@ -92,9 +92,13 @@ ggplot(data=exam_data,
 ```
 :::
 
+![](images/clipboard-770943917.png)
+
 **ggrepel** is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text, by replacing geom_text() with geom_text_repel() and geom_label() with geom_label_repel.
 
-The new chart looks tidier with better visualization as shown below after applying the ggrepel function.
+### **2.3.1 Working with ggrepel**
+
+The new chart looks tidier with better visualization as shown below after applying the **ggrepel** function.
 
 ::: panel-tabset
 ### The Plot
@@ -186,7 +190,7 @@ ggplot(data=exam_data,
 
 **ggthemes** provides ‘ggplot2’ themes that replicate the look of plots by Edward Tufte, Stephen Few, Fivethirtyeight, The Economist, ‘Stata’, ‘Excel’, The Wall Street Journal, and 'Solid', among others.
 
-In the example below, The Wall Stree Journal theme is used.
+In the example below, The Wall Street Journal theme: theme_wsj() is used.
 
 ::: panel-tabset
 ### The Plot
@@ -460,18 +464,19 @@ Figure below is created by combining patchwork and theme_classic() of ggthemes p
 
 ::: panel-tabset
 ### The Plot
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 patchwork <- (p1 / p2) | p3
 patchwork & theme_classic()
 ```
 
 ### The Code
+
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 patchwork <- (p1 / p2) | p3
 patchwork & theme_classic()
 ```
-::: panel-tabset
-
+:::
 
 ## 2.6 Reference
 
