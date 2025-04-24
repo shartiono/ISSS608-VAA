@@ -92,7 +92,7 @@ ggplot(data=exam_data,
 ```
 :::
 
-![](images/clipboard-770943917.png)
+![](images/clipboard-770943917.png){width="800"}
 
 **ggrepel** is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text, by replacing geom_text() with geom_text_repel() and geom_label() with geom_label_repel.
 
