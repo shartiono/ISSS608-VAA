@@ -10,17 +10,17 @@ format: html
 
 # **Programming Animated Statistical Graphics with R**
 
-## **1 Overview**
+## 1 Overview
 
 When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics. In this hands-on exercise, you will learn how to create animated data visualisation by using **gganimate** and **plotly r** packages. At the same time, you will also learn how to (i) reshape data by using **tidyr** package, and (ii) process, wrangle and transform data by using **dplyr** package.
 
-### **1.1 Basic concepts of animation**
+### 1.1 Basic concepts of animation
 
 When creating animations, the plot does not actually move. Instead, many individual plots are built and then stitched together as movie frames, just like an old-school flip book or cartoon. Each frame is a different plot when conveying motion, which is built using some relevant subset of the aggregate data. The subset drives the flow of the animation when stitched back together.
 
 ![](images/clipboard-2255747727.png)
 
-### **1.2 Terminology**
+### 1.2 Terminology
 
 Before we dive into the steps for creating an animated statistical graph, it’s important to understand some of the key concepts and terminology related to this type of visualization.
 
@@ -32,9 +32,9 @@ Before we dive into the steps for creating an animated statistical graph, it’s
 Before you start making animated graphs, you should first ask yourself: Does it makes sense to go through the effort? If you are conducting an exploratory data analysis, a animated graphic may not be worth the time investment. However, if you are giving a presentation, a few well-placed animated graphics can help an audience connect with your topic remarkably better than static counterparts.
 :::
 
-## **2 Getting Started**
+## 2 Getting Started
 
-### **2.1 Loading the R packages**
+### 2.1 Loading the R packages
 
 First, write a code chunk to check, install and load the following R packages:
 
@@ -57,7 +57,7 @@ pacman::p_load(readxl, gifski, gapminder,
 
 
 
-### **2.2 Importing the data**
+### 2.2 Importing the data
 
 In this hands-on exercise, the *Data* worksheet from *GlobalPopulation* Excel workbook will be used.
 
@@ -111,7 +111,7 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 
 
 
-## **3 Animated Data Visualisation: gganimate methods**
+## 3 Animated Data Visualisation: gganimate methods
 
 [**gganimate**](https://gganimate.com/) extends the grammar of graphics as implemented by ggplot2 to include the description of animation. It does this by providing a range of new grammar classes that can be added to the plot object in order to customise how it should change with time.
 
@@ -125,7 +125,7 @@ globalPop <- read_xls("data/GlobalPopulation.xls",
 
 -   `ease_aes()` defines how different aesthetics should be eased during transitions.
 
-### **3.1 Building a static population bubble plot**
+### 3.1 Building a static population bubble plot
 
 In the code chunk below, the basic ggplot2 functions are used to create a static bubble plot.
 
@@ -146,7 +146,7 @@ ggplot(globalPop, aes(x = Old, y = Young,
 
 
 
-### **3.2 Building the animated bubble plot**
+### 3.2 Building the animated bubble plot
 
 In the code chunk below,
 
@@ -175,11 +175,11 @@ ggplot(globalPop, aes(x = Old, y = Young,
 
 The animated bubble chart
 
-## **4 Animated Data Visualisation: plotly**
+## 4 Animated Data Visualisation: plotly
 
 In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key frame animations through the `frame` argument/aesthetic. They also support an `ids` argument/aesthetic to ensure smooth transitions between objects with the same id (which helps facilitate object constancy).
 
-### **4.1 Building an animated bubble plot: `ggplotly()` method**
+### 4.1 Building an animated bubble plot: `ggplotly()` method
 
 In this sub-section, you will learn how to create an animated bubble plot by using `ggplotly()` method.
 
@@ -291,7 +291,7 @@ ggplotly(gg)
 
 :::
 
-### **4.2 Building an animated bubble plot: `plot_ly()` method**
+### 4.2 Building an animated bubble plot: `plot_ly()` method
 
 In this sub-section, you will learn how to create an animated bubble plot by using `plot_ly()` method.
 
@@ -343,11 +343,7 @@ bp
 
 :::
 
-## **4.5 References**
-
--   [Getting Started](https://gganimate.com/articles/gganimate.html)
-
--   Visit this [link](https://rpubs.com/raymondteo/dataviz8) for a very interesting implementation of gganimate by your senior.
+## 4.5 References
 
 -   [Building an animation step-by-step with gganimate](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/).
 
