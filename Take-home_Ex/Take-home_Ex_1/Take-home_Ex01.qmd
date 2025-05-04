@@ -18,17 +18,17 @@ execute:
 
 Creating enlightening and truthful data visualizations involves focusing on accuracy, transparency, and the ability to effectively communicate insights. It’s about presenting data in a way that is both informative and aesthetically pleasing, ensuring the audience can grasp the information quickly and accurately.
 
-## **1.1 Setting the scene**
+## 1.1 Setting the scene
 
 A local online media company that publishes daily content on digital platforms is planning to release an article on demographic structures and distribution of Singapore in 2024.
 
-## **1.2 The Task**
+## 1.2 The Task
 
 Assuming the role of the graphical editor of the media company, we are tasked to prepare at most three data visualization for the article.
 
 ## **2 Getting started**
 
-### **2.1 Load packages**
+### 2.1 Load packages
 
 We load the following R packages using the `pacman::p_load()` function:
 
@@ -39,8 +39,6 @@ We load the following R packages using the `pacman::p_load()` function:
 -   **ggthemes**: to use additional themes for **ggplot2**
 
 -   **patchwork**: to prepare composite figure created using **ggplot2**
-
--   **ggridges**: to plot ridgeline plots
 
 -   **scales**: to provide the internal scaling infrastructure used by **ggplot2**
 
@@ -53,7 +51,7 @@ pacman::p_load(tidyverse, ggrepel, patchwork, ggthemes, scales,
                ggpubr) 
 ```
 
-### **2.2 Import data**
+### 2.2 Import data
 
 To accomplish the task, *Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex, June 2024* dataset shared by [Department of Statistics, Singapore (DOS)](https://www.singstat.gov.sg/) will be used and we wil load it as follows:
 
@@ -62,7 +60,7 @@ data <- read_csv("data/respopagesex2024.csv", col_names = TRUE)
 
 ```
 
-### **2.3 Data Preparation**
+### 2.3 Data Preparation
 
 #### 2.3.1 Dataset Overview
 
@@ -180,7 +178,7 @@ We run an overview of the final dataset again before proceeding to the visualiza
 glimpse(data)
 ```
 
-## 3 Data Visualization
+## **3 Data Visualization**
 
 ### 3.1 1st Visualization : Singapore's Shifting Demographic Structure
 
@@ -687,26 +685,23 @@ ggplot(gen_top10, aes(x = PlanningArea, y = ResidentCount, fill = Generation)) +
 ```
 :::
 
-## 4 Summary
+## **4 Summary**
 
 Singapore’s demographic structure, based on June 2024 data, highlights a maturing society with a dominant working-age group and a median age of 42. The growing share of seniors and the narrowing base of younger age groups reflect the effects of population aging and low birth rates. Mature estates such as Outram have the highest proportion of elderly residents, while Bedok and Tampines house the largest absolute numbers. In contrast, newer towns like Sengkang and Punggol show higher concentrations of younger generations—particularly Gen Alpha and Gen Z—driven by recent BTO developments attracting young families. Millennials remain the largest generational group across most areas, reinforcing their role in shaping urban life. This evolving yet balanced generational landscape underscores the need for inclusive community planning that supports both young families and seniors—fostering intergenerational harmony and enabling families to live, age, and thrive together.
 
-## 5 References
+## **5 References**
 
 -   **Department of Statistics Singapore. (2024).** *Population Trends 2024*.\
     Retrieved from: <https://www.singstat.gov.sg/publications/population/population-trends>
 
--    **Ministry of Health Singapore. (2023).** *Action Plan for Successful Ageing*.\
+-   **Ministry of Health Singapore. (2023).** *Action Plan for Successful Ageing*.\
     Retrieved from: <https://www.moh.gov.sg/newsroom/launch-of-the-2023-action-plan-for-successful-ageing>
-
 
 -   **Housing & Development Board (HDB). (2021).** *Designing for Life: Community Planning and Design Guide*.\
     Retrieved from: <https://www.hdb.gov.sg/cs/infoweb/designing-for-life>
 
-
 -   **Smart Nation and Digital Government Office. (2023).** *Smart Nation: Empowering Everyone Through Technology*.\
     Retrieved from: <https://www.smartnation.gov.sg>
 
-
--    **Singapore Department of Statistics. (n.d.).** *National Statistical Standards*.\
+-   **Singapore Department of Statistics. (n.d.).** *National Statistical Standards*.\
     Retrieved from: https://www.singstat.gov.sg/standards

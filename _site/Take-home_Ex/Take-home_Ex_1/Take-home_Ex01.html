@@ -187,22 +187,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#take-home-exercise-1" id="toc-take-home-exercise-1" class="nav-link active" data-scroll-target="#take-home-exercise-1"><strong>Take-home Exercise 1</strong></a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>1 Overview</strong></a></li>
-  <li><a href="#setting-the-scene" id="toc-setting-the-scene" class="nav-link" data-scroll-target="#setting-the-scene"><strong>1.1 Setting the scene</strong></a></li>
-  <li><a href="#the-task" id="toc-the-task" class="nav-link" data-scroll-target="#the-task"><strong>1.2 The Task</strong></a></li>
+  <li><a href="#setting-the-scene" id="toc-setting-the-scene" class="nav-link" data-scroll-target="#setting-the-scene">1.1 Setting the scene</a></li>
+  <li><a href="#the-task" id="toc-the-task" class="nav-link" data-scroll-target="#the-task">1.2 The Task</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><strong>2 Getting started</strong></a>
   <ul class="collapse">
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages"><strong>2.1 Load packages</strong></a></li>
-  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data"><strong>2.2 Import data</strong></a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><strong>2.3 Data Preparation</strong></a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">2.1 Load packages</a></li>
+  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">2.2 Import data</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2.3 Data Preparation</a></li>
   </ul></li>
-  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">3 Data Visualization</a>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization"><strong>3 Data Visualization</strong></a>
   <ul class="collapse">
   <li><a href="#st-visualization-singapores-shifting-demographic-structure" id="toc-st-visualization-singapores-shifting-demographic-structure" class="nav-link" data-scroll-target="#st-visualization-singapores-shifting-demographic-structure">3.1 1st Visualization : Singapore’s Shifting Demographic Structure</a></li>
   <li><a href="#nd-visualization-understanding-elderly-distribution-a-dual-perspective" id="toc-nd-visualization-understanding-elderly-distribution-a-dual-perspective" class="nav-link" data-scroll-target="#nd-visualization-understanding-elderly-distribution-a-dual-perspective">3.2 2nd Visualization: Understanding Elderly Distribution: A Dual Perspective</a></li>
   <li><a href="#rd-visualization-generational-composition-of-top-10-most-populated-pa" id="toc-rd-visualization-generational-composition-of-top-10-most-populated-pa" class="nav-link" data-scroll-target="#rd-visualization-generational-composition-of-top-10-most-populated-pa">3.3 3rd Visualization: Generational Composition of Top 10 Most Populated PA</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">4 Summary</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">5 References</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><strong>4 Summary</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>5 References</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -254,24 +254,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Creating enlightening and truthful data visualizations involves focusing on accuracy, transparency, and the ability to effectively communicate insights. It’s about presenting data in a way that is both informative and aesthetically pleasing, ensuring the audience can grasp the information quickly and accurately.</p>
 </section>
 <section id="setting-the-scene" class="level2">
-<h2 class="anchored" data-anchor-id="setting-the-scene"><strong>1.1 Setting the scene</strong></h2>
+<h2 class="anchored" data-anchor-id="setting-the-scene">1.1 Setting the scene</h2>
 <p>A local online media company that publishes daily content on digital platforms is planning to release an article on demographic structures and distribution of Singapore in 2024.</p>
 </section>
 <section id="the-task" class="level2">
-<h2 class="anchored" data-anchor-id="the-task"><strong>1.2 The Task</strong></h2>
+<h2 class="anchored" data-anchor-id="the-task">1.2 The Task</h2>
 <p>Assuming the role of the graphical editor of the media company, we are tasked to prepare at most three data visualization for the article.</p>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started"><strong>2 Getting started</strong></h2>
 <section id="load-packages" class="level3">
-<h3 class="anchored" data-anchor-id="load-packages"><strong>2.1 Load packages</strong></h3>
+<h3 class="anchored" data-anchor-id="load-packages">2.1 Load packages</h3>
 <p>We load the following R packages using the <code>pacman::p_load()</code> function:</p>
 <ul>
 <li><p><strong>tidyverse</strong>: R packages designed for data science</p></li>
 <li><p><strong>ggrepel</strong>: to provides geoms for <strong>ggplot2</strong> to repel overlapping text labels</p></li>
 <li><p><strong>ggthemes</strong>: to use additional themes for <strong>ggplot2</strong></p></li>
 <li><p><strong>patchwork</strong>: to prepare composite figure created using <strong>ggplot2</strong></p></li>
-<li><p><strong>ggridges</strong>: to plot ridgeline plots</p></li>
 <li><p><strong>scales</strong>: to provide the internal scaling infrastructure used by <strong>ggplot2</strong></p></li>
 <li><p><strong>ggpubr</strong> to create publication ready ggplot2 plots.</p></li>
 </ul>
@@ -282,14 +281,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="import-data" class="level3">
-<h3 class="anchored" data-anchor-id="import-data"><strong>2.2 Import data</strong></h3>
+<h3 class="anchored" data-anchor-id="import-data">2.2 Import data</h3>
 <p>To accomplish the task, <em>Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex, June 2024</em> dataset shared by <a href="https://www.singstat.gov.sg/">Department of Statistics, Singapore (DOS)</a> will be used and we wil load it as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesex2024.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-preparation" class="level3">
-<h3 class="anchored" data-anchor-id="data-preparation"><strong>2.3 Data Preparation</strong></h3>
+<h3 class="anchored" data-anchor-id="data-preparation">2.3 Data Preparation</h3>
 <section id="dataset-overview" class="level4">
 <h4 class="anchored" data-anchor-id="dataset-overview">2.3.1 Dataset Overview</h4>
 <p>We first take a look at the data. Using the code below, we can get the details of the dataset which contains 60,424 rows and 6 columns.</p>
@@ -450,7 +449,7 @@ $ AgeGroup      &lt;fct&gt; 0–4, 0–4, 0–4, 0–4, 0–4, 0–4, 0–4, 0�
 </section>
 </section>
 <section id="data-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="data-visualization">3 Data Visualization</h2>
+<h2 class="anchored" data-anchor-id="data-visualization"><strong>3 Data Visualization</strong></h2>
 <section id="st-visualization-singapores-shifting-demographic-structure" class="level3">
 <h3 class="anchored" data-anchor-id="st-visualization-singapores-shifting-demographic-structure">3.1 1st Visualization : Singapore’s Shifting Demographic Structure</h3>
 <p><strong>Insights:</strong></p>
@@ -755,11 +754,11 @@ $ AgeGroup      &lt;fct&gt; 0–4, 0–4, 0–4, 0–4, 0–4, 0–4, 0–4, 0�
 </section>
 </section>
 <section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">4 Summary</h2>
+<h2 class="anchored" data-anchor-id="summary"><strong>4 Summary</strong></h2>
 <p>Singapore’s demographic structure, based on June 2024 data, highlights a maturing society with a dominant working-age group and a median age of 42. The growing share of seniors and the narrowing base of younger age groups reflect the effects of population aging and low birth rates. Mature estates such as Outram have the highest proportion of elderly residents, while Bedok and Tampines house the largest absolute numbers. In contrast, newer towns like Sengkang and Punggol show higher concentrations of younger generations—particularly Gen Alpha and Gen Z—driven by recent BTO developments attracting young families. Millennials remain the largest generational group across most areas, reinforcing their role in shaping urban life. This evolving yet balanced generational landscape underscores the need for inclusive community planning that supports both young families and seniors—fostering intergenerational harmony and enabling families to live, age, and thrive together.</p>
 </section>
 <section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">5 References</h2>
+<h2 class="anchored" data-anchor-id="references"><strong>5 References</strong></h2>
 <ul>
 <li><p><strong>Department of Statistics Singapore. (2024).</strong> <em>Population Trends 2024</em>.<br>
 Retrieved from: <a href="https://www.singstat.gov.sg/publications/population/population-trends" class="uri">https://www.singstat.gov.sg/publications/population/population-trends</a></p></li>
