@@ -96,21 +96,14 @@ colnames(data) <- c("PlanningArea", "SubZone", "Age", "Sex", "ResidentCount")
 
 ```
 
--   Next, we observe that for the Age column, there is a value of : "90_and_over". We will replace this value with "90" and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS:
+-   Next, we observe that for the Age column, there is a value of : "90_and_over". We will replace this value with "90" and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS, with the following code:
 
 ```{r, message = FALSE}
 data <- data %>%
   mutate(
-    # Normalize Age values to lowercase
     Age = str_to_lower(Age),
-    
-    # Replace "90_and_over" with "90"
     Age = ifelse(Age == "90_and_over", "90", Age),
-    
-    # Convert to numeric
     Age = as.numeric(Age),
-    
-    # Create AgeGroup with standard bins
     AgeGroup = cut(Age,
                    breaks = c(0,4,9,14,19,24,29,34,39,44,49,54,59,64,69,74,79,84,89, Inf),
                    labels = c("0–4", "5–9", "10–14", "15–19", "20–24", "25–29",
@@ -122,15 +115,13 @@ data <- data %>%
 
 ```
 
--   Further observation of the dataset, we discover there are multiple rows with "0" values in the "Pop"/"ResidentCount" column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness:
+-   Further observation of the dataset, we discover there are multiple rows with "0" values in the "Pop"/"ResidentCount" column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness with the following code:
 
 ```{r}
 
-# Total population before removing zero-pop rows
 total_population_before <- sum(data$ResidentCount, na.rm = TRUE)
 total_rows_before <- nrow(data)
 
-# Count and show how many rows have 0 population
 zero_count <- data %>%
   filter(ResidentCount == 0) %>%
   nrow()
@@ -139,11 +130,9 @@ cat("Total population before cleaning:", format(total_population_before, big.mar
 cat("Total rows before cleaning:", total_rows_before, "\n")
 cat("Rows with 0 ResidentCount removed:", zero_count, "\n")
 
-# Remove rows with 0 population
 data <- data %>%
   filter(ResidentCount > 0)
 
-# Recalculate totals after cleaning
 total_population_after <- sum(data$ResidentCount, na.rm = TRUE)
 total_rows_after <- nrow(data)
 

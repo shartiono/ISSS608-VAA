@@ -341,44 +341,35 @@ Side Note:
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PlanningArea"</span>, <span class="st">"SubZone"</span>, <span class="st">"Age"</span>, <span class="st">"Sex"</span>, <span class="st">"ResidentCount"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Next, we observe that for the Age column, there is a value of : “90_and_over”. We will replace this value with “90” and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS:</li>
+<li>Next, we observe that for the Age column, there is a value of : “90_and_over”. We will replace this value with “90” and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS, with the following code:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize Age values to lowercase</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">str_to_lower</span>(Age),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace "90_and_over" with "90"</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">ifelse</span>(Age <span class="sc">==</span> <span class="st">"90_and_over"</span>, <span class="st">"90"</span>, Age),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to numeric</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">as.numeric</span>(Age),</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create AgeGroup with standard bins</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">AgeGroup =</span> <span class="fu">cut</span>(Age,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">19</span>,<span class="dv">24</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">49</span>,<span class="dv">54</span>,<span class="dv">59</span>,<span class="dv">64</span>,<span class="dv">69</span>,<span class="dv">74</span>,<span class="dv">79</span>,<span class="dv">84</span>,<span class="dv">89</span>, <span class="cn">Inf</span>),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0–4"</span>, <span class="st">"5–9"</span>, <span class="st">"10–14"</span>, <span class="st">"15–19"</span>, <span class="st">"20–24"</span>, <span class="st">"25–29"</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"30–34"</span>, <span class="st">"35–39"</span>, <span class="st">"40–44"</span>, <span class="st">"45–49"</span>, <span class="st">"50–54"</span>, </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"55–59"</span>, <span class="st">"60–64"</span>, <span class="st">"65–69"</span>, <span class="st">"70–74"</span>, <span class="st">"75–79"</span>, </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"80–84"</span>, <span class="st">"85–89"</span>, <span class="st">"90+"</span>),</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">right =</span> <span class="cn">TRUE</span>, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">str_to_lower</span>(Age),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">ifelse</span>(Age <span class="sc">==</span> <span class="st">"90_and_over"</span>, <span class="st">"90"</span>, Age),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">as.numeric</span>(Age),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">AgeGroup =</span> <span class="fu">cut</span>(Age,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">19</span>,<span class="dv">24</span>,<span class="dv">29</span>,<span class="dv">34</span>,<span class="dv">39</span>,<span class="dv">44</span>,<span class="dv">49</span>,<span class="dv">54</span>,<span class="dv">59</span>,<span class="dv">64</span>,<span class="dv">69</span>,<span class="dv">74</span>,<span class="dv">79</span>,<span class="dv">84</span>,<span class="dv">89</span>, <span class="cn">Inf</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0–4"</span>, <span class="st">"5–9"</span>, <span class="st">"10–14"</span>, <span class="st">"15–19"</span>, <span class="st">"20–24"</span>, <span class="st">"25–29"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"30–34"</span>, <span class="st">"35–39"</span>, <span class="st">"40–44"</span>, <span class="st">"45–49"</span>, <span class="st">"50–54"</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"55–59"</span>, <span class="st">"60–64"</span>, <span class="st">"65–69"</span>, <span class="st">"70–74"</span>, <span class="st">"75–79"</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"80–84"</span>, <span class="st">"85–89"</span>, <span class="st">"90+"</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">right =</span> <span class="cn">TRUE</span>, <span class="at">include.lowest =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Further observation of the dataset, we discover there are multiple rows with “0” values in the “Pop”/“ResidentCount” column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness:</li>
+<li>Further observation of the dataset, we discover there are multiple rows with “0” values in the “Pop”/“ResidentCount” column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness with the following code:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total population before removing zero-pop rows</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>total_population_before <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ResidentCount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>total_rows_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Count and show how many rows have 0 population</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>zero_count <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ResidentCount <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total population before cleaning:"</span>, <span class="fu">format</span>(total_population_before, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>total_population_before <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ResidentCount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>total_rows_before <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>zero_count <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ResidentCount <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total population before cleaning:"</span>, <span class="fu">format</span>(total_population_before, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total population before cleaning: 4,193,530 </code></pre>
 </div>
@@ -390,15 +381,13 @@ Side Note:
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows with 0 ResidentCount removed: 23181 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with 0 population</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ResidentCount <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Recalculate totals after cleaning</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>total_population_after <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ResidentCount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>total_rows_after <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total population after cleaning:"</span>, <span class="fu">format</span>(total_population_after, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ResidentCount <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>total_population_after <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ResidentCount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>total_rows_after <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total population after cleaning:"</span>, <span class="fu">format</span>(total_population_after, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total population after cleaning: 4,193,530 </code></pre>
 </div>
