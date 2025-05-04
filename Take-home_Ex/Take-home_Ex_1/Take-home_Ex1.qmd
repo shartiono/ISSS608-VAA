@@ -49,7 +49,7 @@ pacman::p_load(tidyverse, ggrepel, patchwork, ggthemes, scales,
 
 To accomplish the task, *Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex, June 2024* dataset shared by [Department of Statistics, Singapore (DOS)](https://www.singstat.gov.sg/) will be used and we wil load it as follows:
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 data <- read_csv("data/respopagesex2024.csv", col_names = TRUE)
 
 ```
@@ -60,7 +60,7 @@ data <- read_csv("data/respopagesex2024.csv", col_names = TRUE)
 
 We first take a look at the data. Using the code below, we can get the details of the dataset which contains 60,424 rows and 6 columns.
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 glimpse(data)
 
 ```
@@ -69,7 +69,7 @@ glimpse(data)
 
 -   We notice that there is only one value in Time column (2024) which will not be used for further analysis, we will delete this column as per the code chunk below:
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 data <- data %>% select(-Time)
 
 ```
@@ -86,14 +86,14 @@ data <- data %>% select(-Time)
 Please note: according to the DOS accompanying documentation of this dataset, the population figures in the csv file have been rounded to the nearest 10, and as such, total counts may not sum exactly due to rounding adjustments.
 :::
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 colnames(data) <- c("PlanningArea", "SubZone", "Age", "Sex", "ResidentCount")
 
 ```
 
 -   Next, we observe that for the Age column, there is a value of : "90_and_over". We will replace this value with "90" and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS:
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 data <- data %>%
   mutate(
     # Normalize Age values to lowercase
@@ -119,7 +119,7 @@ data <- data %>%
 
 -   Further observation of the dataset, we discover there are multiple rows with "0" values in the "Pop"/"ResidentCount" column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness:
 
-```{r}
+```{r, warning=FALSE}
 
 # Total population before removing zero-pop rows
 total_population_before <- sum(data$ResidentCount, na.rm = TRUE)
@@ -151,7 +151,7 @@ cat("Remaining rows:", total_rows_after, "\n")
 
 Next, Using the `duplicated` function, we see that there are no duplicate entries in the data.
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 data[duplicated(data),]
 ```
 
@@ -159,7 +159,7 @@ data[duplicated(data),]
 
 We run the code below to check for any missing values, and there is none.
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning=FALSE}
 colSums(is.na(data))
 
 ```
@@ -191,7 +191,7 @@ glimpse(data)
 ::: panel-tabset
 ### The Plot
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 pyramid_data <- data %>%
   group_by(AgeGroup, Sex) %>%
@@ -275,7 +275,7 @@ ggplot(pyramid_data, aes(y = AgeGroup, x = ResidentCountSigned, fill = fill_colo
 
 ### The Code
 
-```{r, eval=FALSE, message=FALSE}
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
 
 pyramid_data <- data %>%
   group_by(AgeGroup, Sex) %>%
@@ -369,7 +369,7 @@ ggplot(pyramid_data, aes(y = AgeGroup, x = ResidentCountSigned, fill = fill_colo
 ::: panel-tabset
 ### The Plot
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 elderly_data <- data %>% filter(Age >= 65)
 
@@ -445,7 +445,7 @@ p1 / p2
 
 ### The Code
 
-```{r, eval=FALSE, message=FALSE}
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
 
 elderly_data <- data %>% filter(Age >= 65)
 
@@ -537,7 +537,7 @@ p1 / p2
 ::: panel-tabset
 ### The Plot
 
-```{r, echo=FALSE, message=FALSE, fig.width=10, fig.height=6, fig.align='center'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=6, fig.align='center'}
 
 data <- data %>%
   mutate(Age = as.numeric(Age),
@@ -608,7 +608,7 @@ ggplot(gen_top10, aes(x = PlanningArea, y = ResidentCount, fill = Generation)) +
 
 ### The Code
 
-```{r, eval=FALSE, message=FALSE, fig.width=10, fig.height=6, fig.align='center'}
+```{r, eval=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=6, fig.align='center'}
 
 data <- data %>%
   mutate(Age = as.numeric(Age),
