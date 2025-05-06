@@ -1,5 +1,5 @@
 ---
-title: "Hands-on_Ex04A"
+title: "Hands-on Exercise 04A"
 date: 2025-05-05
 date-modified: last-modified
 format: html
