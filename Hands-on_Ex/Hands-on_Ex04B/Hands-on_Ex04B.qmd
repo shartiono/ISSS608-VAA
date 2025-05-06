@@ -26,12 +26,9 @@ In this hands-on exercise, we will gain hands-on experience on using:
 
 [**ggstatsplot**](https://indrajeetpatil.github.io/ggstatsplot/index.html) ![](https://r4va.netlify.app/chap10/img/image1.jpg){width="20"} is an extension of [**ggplot2**](https://ggplot2.tidyverse.org/) package for creating graphics with details from statistical tests included in the information-rich plots themselves.
 
-```{r}
-cat("```\n")
-cat("-    To provide alternative statistical inference methods by default.\n")
-cat("-    To follow best practices for statistical reporting. For all statistical tests reported in the plots, the default template abides by the [APA](https://my.ilstu.edu/~jhkahn/apastats.html) gold standard for statistical reporting. For example, here are results from a robust t-test:\n")
-cat("```\n")
-```
+-   To provide alternative statistical inference methods by default.
+
+-   To follow best practices for statistical reporting. For all statistical tests reported in the plots, the default template abides by the \[APA\](https://my.ilstu.edu/\~jhkahn/apastats.html) gold standard for statistical reporting. For example, here are results from a robust t-test:
 
 ![](images/clipboard-18459593.png)
 
@@ -55,7 +52,20 @@ exam <- read_csv("data/Exam_data.csv")
 Importing Exam.csv data by using appropriate tidyverse package.
 :::
 
-\# A tibble: 322 × 7 ID CLASS GENDER RACE ENGLISH MATHS SCIENCE \<chr\> \<chr\> \<chr\> \<chr\> \<dbl\> \<dbl\> \<dbl\> 1 Student321 3I Male Malay 21 9 15 2 Student305 3I Female Malay 24 22 16 3 Student289 3H Male Chinese 26 16 16 4 Student227 3F Male Chinese 27 77 31 5 Student318 3I Male Malay 27 11 25 6 Student306 3I Female Malay 31 16 16 7 Student313 3I Male Chinese 31 21 25 8 Student316 3I Male Malay 31 18 27 9 Student312 3I Male Malay 33 19 15 10 Student297 3H Male Indian 34 49 37 \# ℹ 312 more rows
+\# A tibble: 322 × 7
+ID CLASS GENDER RACE ENGLISH MATHS SCIENCE
+\<chr\> \<chr\> \<chr\> \<chr\> \<dbl\> \<dbl\> \<dbl\>
+1 Student321 3I Male Malay 21 9 15
+2 Student305 3I Female Malay 24 22 16
+3 Student289 3H Male Chinese 26 16 16
+4 Student227 3F Male Chinese 27 77 31
+5 Student318 3I Male Malay 27 11 25
+6 Student306 3I Female Malay 31 16 16
+7 Student313 3I Male Chinese 31 21 25
+8 Student316 3I Male Malay 31 18 27
+9 Student312 3I Male Malay 33 19 15
+10 Student297 3H Male Indian 34 49 37
+# ℹ 312 more rows
 
 ### **3.3 One-sample test: *gghistostats()* method**
 
