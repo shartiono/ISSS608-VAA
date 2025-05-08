@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Exercse 04C"
+title: "Hands-on Exercise 04C"
 date: 2025-05-06
 date-modified: last-modified
 format: html
@@ -454,8 +454,6 @@ Note: We only need to perform this step once.
 library(ungeviz)
 ```
 
-
-
 ### **5.3 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
 
 Next, the code chunk below will be used to build the HOPs.
@@ -477,5 +475,3 @@ ggplot(data = exam,
   theme_bw() + 
   transition_states(.draw, 1, 3)
 ```
-
-
