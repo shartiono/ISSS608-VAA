@@ -77,6 +77,10 @@ ggplot(pyramid_data, aes(x = Age, y = Pop, fill = Sex)) +
 
 **Makeover version of the Chart**
 
+Some data preparation is needed:
+- to make the age group of interval 5 years from 0 to 90+
+- to change the data type of Age from character to numeric
+
 ```{r}
 library(dplyr)
 library(ggplot2)
