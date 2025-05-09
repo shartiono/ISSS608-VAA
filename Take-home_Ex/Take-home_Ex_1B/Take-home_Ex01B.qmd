@@ -1,8 +1,8 @@
 ---
-title: "Take-home_Ex01B"
+title: "Take-home Exercise 01B"
 date: 2025-05-07
 date-modified: last-modified
-format: docx
+format: html
 editor: visual
 execute: 
   eval: true
@@ -12,7 +12,7 @@ execute:
 
 # Take-home Exercise 1 - Phase 2
 
-**Phase 2**: to selecting one submission provided by classmate, critic three good design principles and three areas for further improvement. With reference to the comment, prepare the makeover version of the data visualisation. I am selecting this submission from other classmate, as shown [here](https://isss608-cindy.netlify.app/take-home_exercise/take-home_ex01/take-home_ex01a).
+**Phase 2**: to select one submission provided by classmate, critic three good design principles and three areas for further improvement. With reference to the comment, prepare the makeover version of the data visualisation. I am selecting this submission from other classmate, as shown [here](https://isss608-cindy.netlify.app/take-home_exercise/take-home_ex01/take-home_ex01a).
 
 ## **The Designing Tool**
 
