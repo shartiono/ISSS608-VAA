@@ -205,12 +205,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#take-home-exercise-1---phase-2" id="toc-take-home-exercise-1---phase-2" class="nav-link active" data-scroll-target="#take-home-exercise-1---phase-2">Take-home Exercise 1 - Phase 2</a>
   <ul class="collapse">
-  <li><a href="#the-designing-tool" id="toc-the-designing-tool" class="nav-link" data-scroll-target="#the-designing-tool"><strong>The Designing Tool</strong></a></li>
+  <li><a href="#the-designing-tool" id="toc-the-designing-tool" class="nav-link" data-scroll-target="#the-designing-tool">The Designing Tool</a></li>
   <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">Import data</a></li>
   <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a>
   <ul class="collapse">
-  <li><a href="#original-data-visualization-population-pyramid-sex-vs-age" id="toc-original-data-visualization-population-pyramid-sex-vs-age" class="nav-link" data-scroll-target="#original-data-visualization-population-pyramid-sex-vs-age"><strong>1 Original Data Visualization: Population pyramid (Sex vs Age)</strong></a></li>
-  <li><a href="#original-visualization-top-20-most-popular-planning-areas-with-elderly-population-shown" id="toc-original-visualization-top-20-most-popular-planning-areas-with-elderly-population-shown" class="nav-link" data-scroll-target="#original-visualization-top-20-most-popular-planning-areas-with-elderly-population-shown">2 Original Visualization: <strong>Top 20 most popular planning areas with elderly population shown</strong></a></li>
+  <li><a href="#population-pyramid-sex-vs-age" id="toc-population-pyramid-sex-vs-age" class="nav-link" data-scroll-target="#population-pyramid-sex-vs-age">1 Population pyramid (Sex vs Age)</a></li>
+  <li><a href="#top-20-most-popular-planning-areas-with-elderly-population-shown" id="toc-top-20-most-popular-planning-areas-with-elderly-population-shown" class="nav-link" data-scroll-target="#top-20-most-popular-planning-areas-with-elderly-population-shown">2 Top 20 most popular planning areas with elderly population shown</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Take-home Exercise 1 - Phase 2</h1>
 <p><strong>Phase 2</strong>: to select one submission provided by a classmate, critic three good design principles and three areas for further improvement. With reference to the comment, prepare the makeover version of the data visualisation. I am selecting this submission from other classmate, as shown <a href="https://isss608-cindy.netlify.app/take-home_exercise/take-home_ex01/take-home_ex01a">here</a>.</p>
 <section id="the-designing-tool" class="level2">
-<h2 class="anchored" data-anchor-id="the-designing-tool"><strong>The Designing Tool</strong></h2>
+<h2 class="anchored" data-anchor-id="the-designing-tool">The Designing Tool</h2>
 <p>The data should be processed by using appropriate <strong>tidyverse</strong> family of packages and the data visualisation must be prepared using <strong>ggplot2</strong> and <strong>its extensions</strong>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggrepel, patchwork, </span>
@@ -271,8 +271,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
-<section id="original-data-visualization-population-pyramid-sex-vs-age" class="level3">
-<h3 class="anchored" data-anchor-id="original-data-visualization-population-pyramid-sex-vs-age"><strong>1 Original Data Visualization: Population pyramid (Sex vs Age)</strong></h3>
+<section id="population-pyramid-sex-vs-age" class="level3">
+<h3 class="anchored" data-anchor-id="population-pyramid-sex-vs-age">1 Population pyramid (Sex vs Age)</h3>
+<p><strong>Original Data Visualization:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pyramid_data <span class="ot">&lt;-</span> pop_data <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Age, Sex) <span class="sc">%&gt;%</span></span>
@@ -391,8 +392,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="original-visualization-top-20-most-popular-planning-areas-with-elderly-population-shown" class="level3">
-<h3 class="anchored" data-anchor-id="original-visualization-top-20-most-popular-planning-areas-with-elderly-population-shown">2 Original Visualization: <strong>Top 20 most popular planning areas with elderly population shown</strong></h3>
+<section id="top-20-most-popular-planning-areas-with-elderly-population-shown" class="level3">
+<h3 class="anchored" data-anchor-id="top-20-most-popular-planning-areas-with-elderly-population-shown">2 Top 20 most popular planning areas with elderly population shown</h3>
+<p><strong>Original Visualization:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
