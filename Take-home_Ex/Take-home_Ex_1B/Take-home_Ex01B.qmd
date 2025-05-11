@@ -282,9 +282,8 @@ The chart should be sorted by elderly population, not total population, to match
 ### The Plot
 
 ```{r, echo=FALSE}
-library(tidyverse)
 
-# Step 1: Clean Age column
+# Data Preparation
 pop_data <- pop_data %>%
   mutate(
     Age = str_trim(Age),
@@ -296,7 +295,7 @@ pop_data <- pop_data %>%
     Age = as.numeric(Age)
   )
 
-# Step 2: Summarize population
+
 top_areas <- pop_data %>%
   group_by(PA) %>%
   summarise(
@@ -306,7 +305,7 @@ top_areas <- pop_data %>%
   ) %>%
   slice_max(Elderly, n = 20)
 
-# Step 3: Prepare data
+# Prepare data
 plot_data <- top_areas %>%
   mutate(NonElderly = Total - Elderly) %>%
   select(PA, Elderly, NonElderly) %>%
@@ -318,9 +317,9 @@ plot_data <- top_areas %>%
                         "NonElderly" = "Non-Elderly"),
          Group = factor(Group, levels = c("Non-Elderly", "Elderly (65+)"))) %>%
   left_join(top_areas %>% select(PA, Elderly), by = "PA") %>%
-  mutate(PA = fct_reorder(PA, Elderly, .desc = FALSE))  # Bedok on top
+  mutate(PA = fct_reorder(PA, Elderly, .desc = FALSE))  
 
-# Step 4: Plot
+# Plot
 ggplot(plot_data, aes(x = PA, y = Population, fill = Group)) +
   geom_col(width = 0.9) +
   scale_y_continuous(
@@ -342,15 +341,13 @@ ggplot(plot_data, aes(x = PA, y = Population, fill = Group)) +
   theme_classic(base_size = 12) +
   theme(legend.position = "right")
 
-
 ```
 
 ### The Code
 
 ```{r, eval=FALSE}
-library(tidyverse)
 
-# Step 1: Clean Age column
+# Data Preparation
 pop_data <- pop_data %>%
   mutate(
     Age = str_trim(Age),
@@ -362,7 +359,7 @@ pop_data <- pop_data %>%
     Age = as.numeric(Age)
   )
 
-# Step 2: Summarize population
+
 top_areas <- pop_data %>%
   group_by(PA) %>%
   summarise(
@@ -372,7 +369,7 @@ top_areas <- pop_data %>%
   ) %>%
   slice_max(Elderly, n = 20)
 
-# Step 3: Prepare data
+# Prepare data
 plot_data <- top_areas %>%
   mutate(NonElderly = Total - Elderly) %>%
   select(PA, Elderly, NonElderly) %>%
@@ -384,9 +381,9 @@ plot_data <- top_areas %>%
                         "NonElderly" = "Non-Elderly"),
          Group = factor(Group, levels = c("Non-Elderly", "Elderly (65+)"))) %>%
   left_join(top_areas %>% select(PA, Elderly), by = "PA") %>%
-  mutate(PA = fct_reorder(PA, Elderly, .desc = FALSE))  # Bedok on top
+  mutate(PA = fct_reorder(PA, Elderly, .desc = FALSE))  
 
-# Step 4: Plot
+# Plot
 ggplot(plot_data, aes(x = PA, y = Population, fill = Group)) +
   geom_col(width = 0.9) +
   scale_y_continuous(
