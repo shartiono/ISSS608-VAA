@@ -277,6 +277,7 @@ The chart reflects inaccurate figures—e.g., Bedok’s elderly population is ov
 -   Sorting and chart type 
 The chart should be sorted by elderly population, not total population, to match its stated purpose. Using a stacked bar chart (rather than side-by-side horizontal barbars) would better show the elderly count in relation to the total population within each planning area.
 
+**Makeover version of the Chart**
 
 ::: panel-tabset
 ### The Plot
