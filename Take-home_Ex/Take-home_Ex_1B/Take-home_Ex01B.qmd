@@ -2,7 +2,7 @@
 title: "Take-home Exercise 01B"
 date: 2025-05-07
 date-modified: last-modified
-format: html
+format: docx
 editor: visual
 execute: 
   eval: true
