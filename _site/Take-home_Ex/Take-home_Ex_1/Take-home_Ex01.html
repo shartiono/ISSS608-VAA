@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd8cb2610f6c2810c4bc87234a365cf8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -149,6 +149,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04A/Hands-on_Ex04A.html">
  <span class="dropdown-text">Hands-on Exercise 4A</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04B/Hands-on_Ex04B.html">
+ <span class="dropdown-text">Hands-on Exercise 4B</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04C/Hands-on_Ex04C.html">
+ <span class="dropdown-text">Hands-on Exercise 4C</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04D/Hands-on_Ex04D.html">
+ <span class="dropdown-text">Hands-on Exercise 4D</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
+ <span class="dropdown-text">Hands-on Exercise 5</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -159,6 +175,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex_1/Take-home_Ex01.html">
  <span class="dropdown-text">Take-Home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex_1B/Take-home_Ex01B.html">
+ <span class="dropdown-text">Take-Home Exercise 1B</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-Class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-Class_Ex/In-Class_Ex_05/MC1.html">
+ <span class="dropdown-text">In-Class Exercise 5</span></a>
   </li>  
     </ul>
   </li>
@@ -209,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>5 References</strong></a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Take-home_Ex01.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -240,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 4, 2025</p>
+      <p class="date-modified">May 7, 2025</p>
     </div>
   </div>
     
@@ -341,7 +372,7 @@ Side Note:
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PlanningArea"</span>, <span class="st">"SubZone"</span>, <span class="st">"Age"</span>, <span class="st">"Sex"</span>, <span class="st">"ResidentCount"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Next, we observe that for the Age column, there is a value of : “90_and_over”. We will replace this value with “90” and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS:</li>
+<li>Next, we observe that for the Age column, there is a value of : “90_and_over”. We will replace this value with “90” and change the data type from string/character to numeric and then create a new column to classify the age according to the age bracket in the interval of 5 years as per the standard age group published in DOS, with the following code:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
@@ -359,7 +390,7 @@ Side Note:
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Further observation of the dataset, we discover there are multiple rows with “0” values in the “Pop”/“ResidentCount” column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness:</li>
+<li>Further observation of the dataset, we discover there are multiple rows with “0” values in the “Pop”/“ResidentCount” column. We will remove these rows as per the code chunk below, and calculate the number of rows and total population before and after the deletion to ensure completeness with the following code:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>total_population_before <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ResidentCount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
@@ -654,7 +685,7 @@ $ AgeGroup      &lt;fct&gt; 0–4, 0–4, 0–4, 0–4, 0–4, 0–4, 0–4, 0�
 <h3 class="anchored" data-anchor-id="rd-visualization-generational-composition-of-top-10-most-populated-pa">3.3 3rd Visualization: Generational Composition of Top 10 Most Populated PA</h3>
 <p><strong>Insights:</strong></p>
 <ul>
-<li><p><strong>Tampines, Bedok, and Sengkang</strong> are top the list with over 250,000 residents each.</p></li>
+<li><p><strong>Tampines, Bedok, and Sengkang</strong> top the list of most populated PA with over 250,000 residents each.</p></li>
 <li><p><strong>Millennials (age 28–43)</strong> are the largest group in most PA, while Gen X dominates in Bedok, a mature estate.</p></li>
 <li><p><strong>Younger generations</strong> (Gen Alpha and Gen Z) are more concentrated in newer towns like <strong>Sengkang, Punggol, and Jurong West</strong>, aligned with recent BTO developments that attract young families.</p></li>
 <li><p>The distribution reflects a <strong>balanced generational mix</strong>, highlighting Singapore’s <strong>multigenerational living pattern</strong>—with both aging residents and young households sharing town spaces.</p></li>
@@ -852,8 +883,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -964,7 +993,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
