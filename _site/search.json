@@ -691,5 +691,89 @@
     "title": "Hands-on Exercise 05",
     "section": "",
     "text": "Visual Analysis of Complex Networks for Business Intelligence with Gephi\nGraph Drawing\nGraph Analytics - Lesson Learned and Challenges Ahead\nLearning to Read and Interpret Network Graph Data Visualizations\nThe Visualization of Networks\nViZster: Visualizing Online Social Networks\nAdam Perer. “Finding Beautiful Insights in the Chaos of Social Network Visualizations”. In ’‘’Beautiful Visualization’’’. O’Reilly Press.\nVisual Complexity"
+  },
+  {
+    "objectID": "MC1/MC1.html",
+    "href": "MC1/MC1.html",
+    "title": "MC1",
+    "section": "",
+    "text": "pacman::p_load(tidyverse, jsonlite, SmartEDA, tidygraph, ggraph)\nkg &lt;- fromJSON(\"data/MC1_graph.json\")"
+  },
+  {
+    "objectID": "MC1/MC1.html#initial-eda",
+    "href": "MC1/MC1.html#initial-eda",
+    "title": "MC1",
+    "section": "Initial EDA",
+    "text": "Initial EDA\n\nggplot(data = edges_tbl, aes(y = `Edge Type`)) + \n  geom_bar()"
+  },
+  {
+    "objectID": "MC1/MC1.html#creating-knowledge-graph",
+    "href": "MC1/MC1.html#creating-knowledge-graph",
+    "title": "MC1",
+    "section": "Creating knowledge graph",
+    "text": "Creating knowledge graph\n\nStep 1: Mapping from node id to row index\n\nid_map &lt;- tibble(id = nodes_tbl$id, index = seq_len(nrow(nodes_tbl)))\n\n\n\nStep 2: Map source and target IDs to row indices\n\nedges_tbl &lt;- edges_tbl %&gt;%\n  left_join(id_map, by = c(\"source\" = \"id\"), suffix = c(\"\", \"_source\")) %&gt;%\n  rename(from = index) %&gt;%\n  left_join(id_map, by = c(\"target\" = \"id\"), suffix = c(\"\", \"_target\")) %&gt;%\n  rename(to = index)\n\n\n\nStep 3\n\nedges_tbl &lt;- edges_tbl %&gt;%\n  filter(!is.na(from), !is.na(to))\n\n\n\nStep 4: Creating the graph\n\ngraph &lt;- tbl_graph(nodes = nodes_tbl, edges = edges_tbl, \n                   directed = kg$directed)"
+  },
+  {
+    "objectID": "MC1/MC1.html#visualizing-the-knowledge-graph",
+    "href": "MC1/MC1.html#visualizing-the-knowledge-graph",
+    "title": "MC1",
+    "section": "Visualizing the knowledge graph",
+    "text": "Visualizing the knowledge graph\n\nset.seed(1234)\n\n\nVisualizing the whole Graph\n\nggraph(graph, layout = \"fr\") + \n  geom_edge_link(alpha = 0.3, colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`), size = 4) +\n  geom_node_text(aes(label = name), repel = TRUE, size = 2.5) +\n  theme_void()\n\n\nStep 1: Filter edges to only “MemberOf”\n\ngraph_memberof &lt;- graph %&gt;%\n  activate(edges) %&gt;%\n  filter(`Edge Type` == \"MemberOf\")\n\n\n\nStep 2: Extract only connected nodes (ie. used in these edges)\n\nused_node_indices &lt;- graph_memberof %&gt;%\n  activate(edges) %&gt;%\n  as_tibble() %&gt;%\n  select(from, to) %&gt;%\n  unlist() %&gt;%\n  unique()\n\n\n\nStep 3: Keep only those nodes\n\ngraph_memberof &lt;- graph_memberof %&gt;%\n  activate(nodes) %&gt;%\n  mutate(row_id = row_number()) %&gt;%\n  filter(row_id %in% used_node_indices) %&gt;%\n  select(-row_id)  #optional cleanup\n\n\n\nPlot the sub-graph\n\nggraph(graph_memberof, layout = \"fr\") + \n  geom_edge_link(alpha = 0.5, colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`), size = 1) +\n  geom_node_text(aes(label = name), repel = TRUE, size = 2.5) +\n  theme_void()"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html",
+    "title": "MC1",
+    "section": "",
+    "text": "pacman::p_load(tidyverse, jsonlite, SmartEDA, tidygraph, ggraph)\nkg &lt;- fromJSON(\"data/MC1_graph.json\")"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html#initial-eda",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html#initial-eda",
+    "title": "MC1",
+    "section": "Initial EDA",
+    "text": "Initial EDA\n\nggplot(data = edges_tbl, aes(y = `Edge Type`)) + \n  geom_bar()"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html#creating-knowledge-graph",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html#creating-knowledge-graph",
+    "title": "MC1",
+    "section": "Creating knowledge graph",
+    "text": "Creating knowledge graph\n\nStep 1: Mapping from node id to row index\n\nid_map &lt;- tibble(id = nodes_tbl$id, index = seq_len(nrow(nodes_tbl)))\n\n\n\nStep 2: Map source and target IDs to row indices\n\nedges_tbl &lt;- edges_tbl %&gt;%\n  left_join(id_map, by = c(\"source\" = \"id\"), suffix = c(\"\", \"_source\")) %&gt;%\n  rename(from = index) %&gt;%\n  left_join(id_map, by = c(\"target\" = \"id\"), suffix = c(\"\", \"_target\")) %&gt;%\n  rename(to = index)\n\n\n\nStep 3\n\nedges_tbl &lt;- edges_tbl %&gt;%\n  filter(!is.na(from), !is.na(to))\n\n\n\nStep 4: Creating the graph\n\ngraph &lt;- tbl_graph(nodes = nodes_tbl, edges = edges_tbl, \n                   directed = kg$directed)"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html#visualizing-the-knowledge-graph",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1/MC1.html#visualizing-the-knowledge-graph",
+    "title": "MC1",
+    "section": "Visualizing the knowledge graph",
+    "text": "Visualizing the knowledge graph\n\nset.seed(1234)\n\n\nVisualizing the whole Graph\n\nggraph(graph, layout = \"fr\") + \n  geom_edge_link(alpha = 0.3, colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`), size = 4) +\n  geom_node_text(aes(label = name), repel = TRUE, size = 2.5) +\n  theme_void()\n\n\nStep 1: Filter edges to only “MemberOf”\n\ngraph_memberof &lt;- graph %&gt;%\n  activate(edges) %&gt;%\n  filter(`Edge Type` == \"MemberOf\")\n\n\n\nStep 2: Extract only connected nodes (ie. used in these edges)\n\nused_node_indices &lt;- graph_memberof %&gt;%\n  activate(edges) %&gt;%\n  as_tibble() %&gt;%\n  select(from, to) %&gt;%\n  unlist() %&gt;%\n  unique()\n\n\n\nStep 3: Keep only those nodes\n\ngraph_memberof &lt;- graph_memberof %&gt;%\n  activate(nodes) %&gt;%\n  mutate(row_id = row_number()) %&gt;%\n  filter(row_id %in% used_node_indices) %&gt;%\n  select(-row_id)  #optional cleanup\n\n\n\nPlot the sub-graph\n\nggraph(graph_memberof, layout = \"fr\") + \n  geom_edge_link(alpha = 0.5, colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`), size = 1) +\n  geom_node_text(aes(label = name), repel = TRUE, size = 2.5) +\n  theme_void()"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1.html",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1.html",
+    "title": "In-Class Exercise 05",
+    "section": "",
+    "text": "MC 01\npacman::p_load(tidyverse, jsonlite, SmartEDA, tidygraph, ggraph)\nkg &lt;- fromJSON(\"data/MC1_graph.json\")"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1.html#initial-eda",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1.html#initial-eda",
+    "title": "In-Class Exercise 05",
+    "section": "Initial EDA",
+    "text": "Initial EDA\n\nggplot(data = edges_tbl, aes(y = `Edge Type`)) + \n  geom_bar()"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1.html#creating-knowledge-graph",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1.html#creating-knowledge-graph",
+    "title": "In-Class Exercise 05",
+    "section": "Creating knowledge graph",
+    "text": "Creating knowledge graph\n\nStep 1: Mapping from node id to row index\n\nid_map &lt;- tibble(id = nodes_tbl$id, index = seq_len(nrow(nodes_tbl)))\n\n\n\nStep 2: Map source and target IDs to row indices\n\nedges_tbl &lt;- edges_tbl %&gt;%\n  left_join(id_map, by = c(\"source\" = \"id\"), suffix = c(\"\", \"_source\")) %&gt;%\n  rename(from = index) %&gt;%\n  left_join(id_map, by = c(\"target\" = \"id\"), suffix = c(\"\", \"_target\")) %&gt;%\n  rename(to = index)\n\n\n\nStep 3\n\nedges_tbl &lt;- edges_tbl %&gt;%\n  filter(!is.na(from), !is.na(to))\n\n\n\nStep 4: Creating the graph\n\ngraph &lt;- tbl_graph(nodes = nodes_tbl, edges = edges_tbl, \n                   directed = kg$directed)"
+  },
+  {
+    "objectID": "In-Class_Ex/In-Class_Ex_5/MC1.html#visualizing-the-knowledge-graph",
+    "href": "In-Class_Ex/In-Class_Ex_5/MC1.html#visualizing-the-knowledge-graph",
+    "title": "In-Class Exercise 05",
+    "section": "Visualizing the knowledge graph",
+    "text": "Visualizing the knowledge graph\n\nset.seed(1234)\n\n\nVisualizing the whole Graph\n\nggraph(graph, layout = \"fr\") + \n  geom_edge_link(alpha = 0.3, colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`), size = 4) +\n  geom_node_text(aes(label = name), repel = TRUE, size = 2.5) +\n  theme_void()\n\n\nStep 1: Filter edges to only “MemberOf”\n\ngraph_memberof &lt;- graph %&gt;%\n  activate(edges) %&gt;%\n  filter(`Edge Type` == \"MemberOf\")\n\n\n\nStep 2: Extract only connected nodes (ie. used in these edges)\n\nused_node_indices &lt;- graph_memberof %&gt;%\n  activate(edges) %&gt;%\n  as_tibble() %&gt;%\n  select(from, to) %&gt;%\n  unlist() %&gt;%\n  unique()\n\n\n\nStep 3: Keep only those nodes\n\ngraph_memberof &lt;- graph_memberof %&gt;%\n  activate(nodes) %&gt;%\n  mutate(row_id = row_number()) %&gt;%\n  filter(row_id %in% used_node_indices) %&gt;%\n  select(-row_id)  #optional cleanup\n\n\n\nPlot the sub-graph\n\nggraph(graph_memberof, layout = \"fr\") + \n  geom_edge_link(alpha = 0.5, colour = \"gray\") +\n  geom_node_point(aes(color = `Node Type`), size = 1) +\n  geom_node_text(aes(label = name), repel = TRUE, size = 2.5) +\n  theme_void()"
   }
 ]
