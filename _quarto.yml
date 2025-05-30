@@ -33,6 +33,8 @@ website:
         href: "Take-home_Ex/Take-home_Ex_1/Take-home_Ex01.html"  
       - text: "Take-Home Exercise 1B"
         href: "Take-home_Ex/Take-home_Ex_1B/Take-home_Ex01B.html" 
+      - text: "Take-Home Exercise 2"
+        href: "Take-home_Ex/Take-home_Ex_2/Take-home_Ex_2.html"   
     - text: "In-Class Exercise"
       menu: 
       - text: "In-Class Exercise 5"

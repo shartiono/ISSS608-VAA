@@ -1,0 +1,582 @@
+---
+title: "Take-home Exercise 2"
+date: 2025-05-22
+date-modified: last-modified
+format: html
+editor: visual
+execute: 
+  eval: true
+  echo: true
+  warning: false
+---
+
+# 1 Overview
+
+In this exercise, we will be using [Mini-Challenge 2](https://vast-challenge.github.io/2025/MC2.html) from [VAST Challenge 2025](https://vast-challenge.github.io/2025/index.html), where we will take on the theme of conflict over societal change. Two opposing groups Fishing is Living and Heritage (FILAH) and Tourism Raises OceanUs Together (TROUT) representing the fishing and tourism industries are vying for economic development funding and claiming a local government board, Commission on Overseeing the Economic Future of Oceanus (COOTEFOO), of bias. We will try to reconstruct a true timeline with data that comes from both sides.
+
+## **1.1 Tasks and Questions:**
+
+1.  Based on the datasets that TROUT & FILAH have provided, use visual analytics to determine if each group’s accusations are supported by their own record set. In other words, develop a visualization to highlight bias (if present) in TROUT & FILAHS datasets. Is there evidence of bias in the COOTEFOO member actions in either dataset?
+
+2.  As a journalist, Ms. Moray would like a more complete picture of the COOTEFOO’s actions and activities. She has arranged to combine the data provided by TROUT and FILAH into a single knowledge graph along with additional records. Design visual analytics approaches for this combined knowledge graph to see how members of COOTEFOO spend their time. Is the committee as a whole biased? Provide visual evidence for your conclusions.
+
+3.  The TROUT and FILAH datasets are incomplete. Use your visualizations to compare and contrast conclusions drawn from the TROUT and FILAH datasets separately with behaviors in the whole dataset. Are the accusations of TROUT strengthened, weakened or unchanged when taken in context of the whole dataset?
+
+4.  Design a visualization that allows Ms. Moray to pick a person and highlight the differences in that person’s behavior as illustrated through the different datasets. Focus on the contrast in the story each dataset tells.
+
+    1.  Pick at least one COOTEFOO member accused by TROUT. Illustrate how your understanding of their activities changed when using the more complete dataset.
+
+    2.  What are the key pieces of evidence missing from the original TROUT data that most influenced the change in judgement.
+
+    3.  Whose behaviors are most impacted by sampling bias when looking at the FILAH dataset in context of the other data?
+
+    4.  Illustrate the bias of the FILAH data in the context of the whole dataset.
+
+## 1.2 Getting Started
+
+We will use the following packages and using the p_load() of pacman package to load the R packages into R environment.
+
+-   **`tidyverse`**: Tools for data wrangling and visualization.
+-   **`jsonlite`**: Reads and writes JSON data.
+-   **`SmartEDA`**: Automates exploratory data analysis.
+-   **`tidygraph`**: Manipulates network data in tidy format.
+-   **`ggraph`**: Visualizes network graphs.
+-   **`data.table`**: Fast data manipulation for large datasets.
+-   **`DT`**: Creates interactive data tables.
+-   **`visNetwork`**: Builds interactive network graphs.
+-   **`tidyr`**: Reshapes and tidies data.
+-   **`naniar`**: Visualizes and handles missing data.
+
+<details>
+
+<summary>Show the code</summary>
+```{r}
+pacman::p_load(tidyverse, jsonlite, SmartEDA, tidygraph, ggrepel, ggraph, data.table, DT, visNetwork, tidyr, naniar, skimr, ggplot2, ggridges, ggalt)
+
+```
+
+</details>
+
+# 2 Importing Knowledge Graph Data
+
+First, we will analyze the 3 files by importing them into R using the code chunk below:
+
+<details>
+
+<summary>Show the code</summary>
+
+```{r}
+filah <- fromJSON("data/FILAH.json")
+trout <- fromJSON("data/TROUT.json")
+journalist <- fromJSON("data/journalist.json")
+```
+
+</details>
+
+# 3 Data Preparation
+
+## 3.1 Inspecting Knowledge Graph Structure
+
+The datasets contain graph data, where nodes can be accessed via nodes and edges via links. The datasets have a lot of columns but we will only filter the relevant columns in this analysis.
+
+<details>
+
+<summary>Show the code</summary>
+
+::: panel-tabset
+### FILAH
+
+```{r}
+glimpse(filah)
+
+```
+
+### TROUT
+
+```{r}
+glimpse(trout)
+
+```
+
+### JOURNALIST
+
+```{r}
+glimpse(journalist)
+
+```
+:::
+
+</details>
+
+## **3.2 Extracting the edges and nodes tables**
+
+Next, `as_tibble()` of **tibble** package package is used to extract the nodes and links tibble data frames from each of the dataframe into two separate tibble dataframes called *nodes* and *edges* respectively.
+
+::: panel-tabset
+### FILAH
+
+```{r}
+filah_nodes <- as_tibble(filah$nodes)
+filah_edges <- as_tibble(filah$links)
+
+```
+
+### TROUT
+
+```{r}
+trout_nodes <- as_tibble(trout$nodes)
+trout_edges <- as_tibble(trout$links)
+
+```
+
+### JOURNALIST
+
+```{r}
+journalist_nodes <- as_tibble(journalist$nodes)
+journalist_edges <- as_tibble(journalist$links)
+
+```
+:::
+
+# 4 Initial EDA
+
+## 4.1 Frequency Distribution
+
+### 4.1.1 Nodes Categorical Frequency Distribution
+
+In the code chunk below, `ExpCatViz()` of SmartEDA package is used to reveal the frequency distribution of all categorical fields in each *nodes* tibble dataframe.
+
+:::::: panel-tabset
+### FILAH
+
+```{r}
+ExpCatViz(data=filah_nodes,
+          col="lightblue")
+```
+
+::: {.callout-note title="Observation"}
+**Node Type** : Nearly half (48%) of the nodes in FILAH are trip-related, indicating a strong emphasis on travel data. There is moderate representation of discussion (15%), place (15%), and plan (10%) nodes, while missing type values (NA) at around 3%.
+
+**Role:** 99% of nodes have missing role values. There are only 3 known roles: 2 Members and 1 Committee Chair.
+
+**Zone:** 82% of place nodes are missing zoning info. Among known zones, `commercial` dominates (14%).
+:::
+
+### TROUT
+
+```{r}
+ExpCatViz(data=trout_nodes,
+          col="lightblue")
+```
+
+::: {.callout-note title="Observation"}
+**Node Type:** more evenly distributed, with Discussion (24%), Plan (20%), and Place (18%) making up the majority. Trip nodes are notably lower at 11% compared to 48% in FILAH, suggesting that TROUT places greater emphasis on planning and discourse rather than travel activity. NA values are minimal at 2%.
+
+**Zone:** - 80% missing, only government zone shows some visibility (12%).
+
+**Role:** - 96% missing, but contains more variety than FILAH (includes Treasurer, Vice Chair).
+:::
+
+### JOURNALIST
+
+```{r}
+ExpCatViz(data=journalist_nodes,
+          col="lightblue")
+```
+
+::: {.callout-note title="Observation"}
+**Node Type:** Strong emphasis on trip (46%) and place (21%) nodes, with plan (10%) and discussion (14%) also notable; NA values are minimal (\~3%).
+
+**Role:** 99% of role values are missing
+
+**Zone:** 77% missing, but better coverage than FILAH or TROUT. commercial (12%) is the most visible zone type, followed by residential (4%) and government (4%).
+:::
+::::::
+
+### 4.1.2 Edges Categorical Frequency Distribution
+
+We will also be using code chunk below that uses ExpCATViz() of SmartEDA package to reveal the frequency distribution of all categorical fields in the edges tibble dataframe.
+
+::: panel-tabset
+### FILAH
+
+```{r}
+ExpCatViz(data=filah_edges,
+          col="lightblue")
+```
+
+### TROUT
+
+```{r}
+ExpCatViz(data=trout_edges,
+          col="lightblue")
+```
+
+### JOURNALIST
+
+```{r}
+ExpCatViz(data=journalist_edges,
+          col="lightblue")
+```
+:::
+
+::: {.callout-note title="Observation"}
+
+Across all three datasets, the role field shows a high proportion of missing (NA) values, with JOURNALIST at 70%, FILAH at 46%, and TROUT at 25%, indicating limited role clarity—especially in the full dataset. The status attribute is also largely incomplete, with over 90% of entries missing in every dataset, limiting insights into project progression. For sentiment, although a small proportion of edges carry values, positive sentiment (value = 1) dominates across all datasets—FILAH (5%), TROUT (10%), and JOURNALIST (4%)—while over 75–90% of entries are NA. This highlights a critical gap in annotation completeness, constraining deeper interpretation of engagement tone or project state.
+:::
+
+
+### 4.1.3 Nodes Numerical Frequency Distribution
+
+Next, we will use the code chunk below that uses ExpNumViz() of SmartEDA package to reveal the frequency distribution of all numerical fields in the nodes tibble dataframe.
+
+::: panel-tabset
+### FILAH
+
+```{r}
+ExpNumViz(filah_nodes)
+```
+
+### TROUT
+
+```{r}
+ExpNumViz(trout_nodes)
+```
+
+### JOURNALIST
+
+```{r}
+ExpNumViz(journalist_nodes)
+```
+:::
+
+::: {.callout-note title="Observation"}
+The spatial density plots reveal notable differences in geographic coverage across the datasets. **FILAH** shows a bi-modal distribution in both latitude and longitude, with mild skewness, indicating a focus on two primary regions—likely aligned with fishing routes or coastal hubs.
+
+**TROUT**, on the other hand, exhibits a more skewed latitude distribution and tighter clustering in longitude, suggesting activity is concentrated in fewer, likely policy- or tourism-related zones.
+
+In contrast, the **JOURNALIST** dataset displays the most balanced and inclusive spatial distribution, combining patterns from both FILAH and TROUT. This makes JOURNALIST the best baseline for identifying potential geographic bias or omissions in the two advocacy group datasets.
+:::
+
+### 4.1.4 Edges Numerical Frequency Distribution
+
+Below, we will use the code chunk below that uses ExpNumViz() of SmartEDA package to reveal the frequency distribution of all numerical fields in the edges tibble dataframe.
+
+::: panel-tabset
+### FILAH
+
+```{r}
+ExpNumViz(filah_edges)
+```
+
+### TROUT
+
+```{r}
+ExpNumViz(trout_edges)
+```
+
+### JOURNALIST
+
+```{r}
+ExpNumViz(journalist_edges)
+```
+:::
+
+::: {.callout-note title="Observation"}
+
+All three datasets show a left-skewed sentiment distribution, indicating a tendency toward positive sentiment in recorded interactions. **FILAH** displays moderate skewness, suggesting selective positivity likely aligned with pro-fishing narratives. **TROUT** is more balanced, showing a wider range of sentiment and possibly greater objectivity. **JOURNALIST** has the strongest left skew and a sharp peak, reflecting a high concentration of positive sentiment—likely a result of broader coverage rather than selective reporting. This highlights how sentiment framing differs across datasets, with TROUT offering more variation, while FILAH and JOURNALIST lean more positive overall.
+
+:::
+
+## 4.2 Check for Missing Values
+
+Next, we will check the missing values in the dataset.
+
+<details>
+
+<summary>Show the code</summary>
+
+```{r}
+
+# Filter to only columns with missing values
+miss_summary_nodes <- bind_rows(
+  miss_var_summary(filah_nodes) %>% mutate(dataset = "FILAH"),
+  miss_var_summary(trout_nodes) %>% mutate(dataset = "TROUT"),
+  miss_var_summary(journalist_nodes) %>% mutate(dataset = "JOURNALIST")
+) %>% 
+  filter(n_miss > 0) %>% 
+  select(dataset, variable, n_miss, pct_miss)
+
+miss_summary_edges <- bind_rows(
+  miss_var_summary(filah_edges) %>% mutate(dataset = "FILAH"),
+  miss_var_summary(trout_edges) %>% mutate(dataset = "TROUT"),
+  miss_var_summary(journalist_edges) %>% mutate(dataset = "JOURNALIST")
+) %>% 
+  filter(n_miss > 0) %>% 
+  select(dataset, variable, n_miss, pct_miss)
+
+# Display filtered tables
+DT::datatable(miss_summary_nodes)
+DT::datatable(miss_summary_edges)
+
+```
+
+</details>
+
+::: {.callout-note title="Observation"}
+Across all datasets, key attributes such as role, zone, plan_type, and sentiment exhibit high number of missing values—exceeding 90% in most cases for FILAH and TROUT. The JOURNALIST dataset provides broader coverage but still lacks complete detail in certain fields. These gaps highlight the need to interpret findings cautiously and emphasize the importance of using the full dataset for bias assessment.
+:::
+
+
+
+## 4.3 Check for Duplicate Values
+
+In the code below we will check for any duplicate values in the dataset.
+
+<details>
+
+<summary>Show the code</summary>
+
+```{r}
+# Check for duplicate IDs in each dataset
+list(
+  FILAH = filah_nodes %>% summarise(duplicates = sum(duplicated(id))),
+  TROUT = trout_nodes %>% summarise(duplicates = sum(duplicated(id))),
+  JOURNALIST = journalist_nodes %>% summarise(duplicates = sum(duplicated(id)))
+)
+
+```
+
+</details>
+
+::: {.callout-note title="Duplicate ID Check"}
+All three node datasets (FILAH, TROUT, and JOURNALIST) have unique `id` values with no duplicates, confirming structural integrity at the node level.
+:::
+
+
+## 4.4 Edges and Nodes Overview
+Before proceeding, we shall take a look at the edges and nodes data overview using the skim function, with the code below.
+
+<details>
+
+<summary>Show the code</summary>
+
+::: panel-tabset
+### FILAH
+
+```{r}
+skim(filah_edges)
+```
+### TROUT
+
+```{r}
+skim(trout_edges)
+```
+
+### JOURNALIST
+
+```{r}
+skim(journalist_edges)
+```
+
+:::
+
+```{r}
+skim(filah_nodes)
+skim(trout_nodes)
+skim(journalist_nodes)
+```
+
+</details>
+
+
+# 5. Data Cleaning, Wrangling, and Visualization
+
+## 5.1 Building the Function
+
+We define reusable functions to clean and wrangle the nodes and edges of each dataset into a graph structure and visualize the result. We will use id, type and label to build the function for Knowledge Graph.
+
+<details>
+
+<summary>Show the code</summary>
+
+
+```{r}
+# Function to clean and build graph
+
+build_graph_data <- function(nodes_df, edges_df) {
+  # Clean nodes
+  nodes_cleaned <- nodes_df %>%
+    mutate(id = as.character(id)) %>%
+    filter(!is.na(id)) %>%
+    distinct(id, .keep_all = TRUE) %>%
+    select(id, type, label)
+  
+  # Clean edges
+  edges_cleaned <- edges_df %>%
+    rename(from = source, to = target) %>%
+    mutate(across(c(from, to), as.character)) %>%
+    filter(from %in% nodes_cleaned$id, to %in% nodes_cleaned$id)
+  
+  # Simplified edge table for graph
+  edges_min <- edges_cleaned %>%
+    select(from, to, role)
+    
+  # Build tidygraph object
+  graph_obj <- tbl_graph(
+    nodes = nodes_cleaned,
+    edges = edges_min,
+    directed = TRUE
+  )
+  
+  # Return all elements for reuse
+  return(list(
+    nodes_cleaned = nodes_cleaned,
+    edges_cleaned = edges_cleaned,
+    edges_min = edges_min,
+    graph = graph_obj
+  ))
+}
+```
+
+</details>
+
+As several of ggraph layouts involve randomization, in order to ensure reproducibility, it is necessary to set the seed value before plotting. We will use the following function to visualize the knowledge graph:
+
+<details>
+
+<summary>Show the code</summary>
+
+```{r}
+plot_graph_overview <- function(graph_obj, title = "Graph Overview") {
+  set.seed(1234)  # Ensure reproducibility
+  
+  ggraph(graph_obj, layout = "fr") +
+    geom_edge_link(alpha = 0.3, colour = "gray") +
+    geom_node_point(aes(color = type), size = 4) +
+    geom_node_text(aes(label = type), repel = TRUE, size = 2.5) +
+    ggtitle(title) +
+    theme_void()
+}
+
+
+```
+
+</details>
+
+## 5.2 Visualizing the Knowledge Graph
+
+we will use the functions set up earlier for each dataset to visualize the knowledge graph as follows:
+
+::: panel-tabset
+
+### FILAH
+
+```{r}
+filah_data <- build_graph_data(filah_nodes, filah_edges)
+plot_graph_overview(filah_data$graph, "FILAH Knowledge Graph")
+```
+
+::: {.callout-note title="Insights — FILAH Knowledge Graph"}
+The FILAH Knowledge Graph is strongly travel-oriented, with **trip** and **place** nodes dominating the structure. These nodes form tight clusters, particularly on the graph’s periphery, highlighting a dataset constructed heavily around physical movements and site visits. The central region connects a smaller set of **plan**, **discussion**, and **topic** nodes, indicating some internal deliberation, though not as extensively represented. The prevalence of pink (trip) and cyan (place) suggests a bias toward documenting activities tied to fishing zones and physical visits, aligning with FILAH’s focus. There are relatively few missing (NA) nodes, and **entity.person** nodes appear less central—implying limited metadata on individual involvement.
+:::
+
+---
+
+### TROUT
+
+```{r}
+trout_data <- build_graph_data(trout_nodes, trout_edges)
+plot_graph_overview(trout_data$graph, "TROUT Knowledge Graph")
+```
+
+::: {.callout-note title="Insights — TROUT Knowledge Graph"}
+The TROUT Knowledge Graph presents a denser, more balanced core structure, emphasizing **discussion**, **plan**, and **meeting** nodes. These indicate a dataset centered on dialogue and strategy rather than physical movement. **Trip** and **place** nodes are present but largely positioned in the outer cluster, suggesting they play a supporting rather than dominant role in this narrative. The central cluster tightly links **topics** to discussions and plans, reflecting TROUT's focus on tourism policy, planning, and civic engagement. **Entity.person** nodes are more visible here than in FILAH, showing clearer attribution of roles within planning processes. Overall, the structure reflects a policy-driven lens with a centralized documentation approach.
+:::
+
+---
+
+### JOURNALIST
+
+```{r}
+journalist_data <- build_graph_data(journalist_nodes, journalist_edges)
+plot_graph_overview(journalist_data$graph, "JOURNALIST Knowledge Graph")
+```
+
+::: {.callout-note title="Insights — Journalist Knowledge Graph"}
+The Journalist Knowledge Graph is the most comprehensive and integrated among the three. It merges the narrative strengths of both FILAH and TROUT datasets—featuring a rich, interconnected core of **plans**, **discussions**, **topics**, and **meetings**, while also showing extensive clusters of **trips** and **places**. The graph structure indicates a full lifecycle of committee activity: from discourse to field visits. **Entity.person** and **entity.organization** nodes are more evenly distributed and active, suggesting better attribution and data coverage. While there are more NA-labeled nodes compared to other graphs, the overall density and connectivity reveal a holistic portrayal of COOTEFOO's activities, enabling clearer bias assessment when cross-referenced with the other two graphs.
+:::
+
+
+:::
+
+
+## 5.3 COOTEFOO Member List
+
+Next, we will examine the Name and Role variables that are present in each dataset to see the involvement of the COOTEFOO members, with the code below:
+
+<details>
+
+<summary>Show the code</summary>
+
+```{r}
+
+# Set role hierarchy for custom ordering
+role_order <- c("Committee Chair", "Vice Chair", "Treasurer", "Member")
+
+# Combine and pivot the dataset
+cootefoo_members_all <- bind_rows(
+  filah_nodes %>% filter(!is.na(role)) %>% mutate(source = "FILAH"),
+  trout_nodes %>% filter(!is.na(role)) %>% mutate(source = "TROUT"),
+  journalist_nodes %>% filter(!is.na(role)) %>% mutate(source = "JOURNALIST")
+) %>%
+  distinct(name, role, source) %>%
+  mutate(present = TRUE) %>%
+  pivot_wider(
+    names_from = source,
+    values_from = present,
+    values_fill = FALSE
+  ) %>%
+  mutate(role = factor(role, levels = role_order)) %>%
+  arrange(role, name)
+
+# convert TRUE/FALSE to "✔" / ""
+cootefoo_members_all_display <- cootefoo_members_all %>%
+  mutate(across(FILAH:JOURNALIST, ~ ifelse(.x, "✔", "")))
+
+# View arranged table
+cootefoo_members_all_display
+
+```
+
+</details>
+
+::: {.callout-note title='Insights — COOTEFOO Member Dataset Representation'}
+
+All six COOTEFOO members are present in the JOURNALIST dataset, confirming its completeness. The TROUT dataset also includes all members, while FILAH is missing Ed Helpsford, Teddy Goldstein, and Tante Titan — all of whom hold senior or relevant committee positions. We should explore and investigate further.
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
