@@ -693,7 +693,7 @@ This approach ensures that when a member expresses a positive sentiment, we unde
 
 ### 6.1.2 Overall Sentiment - Bias Score Ridgeline
 
-This ridgeline chart shows how the aggregate sentiment scores (bias scores) are distributed across the TROUT and FILAH datasets. A score near +1 suggests strong support for tourism, while a score near –1 suggests alignment with fishing interests. We will use blue colour to represent FILAH and yellow colour for TROUT.
+This ridgeline chart shows how the aggregate sentiment scores (bias scores) are distributed across the TROUT and FILAH datasets. A score near +1 suggests strong support for tourism, while a score near –1 suggests alignment with fishing interests. We will use **blue** colour to represent **FILAH** and **yellow** colour for **TROUT**.
 
 <details>
 
@@ -923,14 +923,17 @@ TROUT features **Teddy Goldstein**, **Seal**, and **Ed Helpsford**. Teddy expres
 
 </details>
 
-::: {.callout-note title="Answer — Evidence of Bias in TROUT & FILAH"}
-Yes, both datasets show evidence of bias through **selective inclusion of members**, **inconsistent sentiment representation**, and **narrative alignment gaps**.
+::: {.callout-note title="Q1 Answer — Evidence of Bias in TROUT & FILAH"}
+Both the TROUT and FILAH datasets reveal potential indicators of bias, particularly in the way sentiment is recorded and which COOTEFOO members are included or omitted.
 
--   **FILAH** omits key members and includes only tourism-leaning sentiment, despite claiming fishing advocacy.
+FILAH includes only a subset of COOTEFOO members and primarily reflects positive sentiment toward tourism, which appears at odds with its stated advocacy for the fishing sector.
 
--   **TROUT** includes strong pro-fishing voices, possibly to downplay or redirect accusations.
+TROUT, while including more members, emphasizes voices that are critical of tourism and supportive of fishing, suggesting a narrative aligned with their stance.
 
-These findings indicate each group may be using incomplete or filtered data to reinforce their agenda, confirming concerns of bias in both TROUT and FILAH datasets.
+These observations suggest that each dataset may reflect the priorities and framing choices of its source organization. However, the patterns of inclusion, omission, and sentiment warrant deeper exploration.
+
+To better understand the extent and implications of these biases, the subsequent questions (Q2–Q4) will integrate a more complete dataset and examine structural, geographic, and individual-level behavior in context.
+
 :::
 
 ## 6.2 Question 2
@@ -1113,9 +1116,6 @@ To complement the earlier network graph, we insert a bar plot showing how many t
 <summary>Show the code</summary>
 
 ```{r}
-# Load required packages
-library(tidyverse)
-library(forcats)
 
 # Filter only COOTEFOO members and participant roles
 cootefoo_members <- c("Seal", "Simone Kat", "Carol Limpet", 
@@ -1397,7 +1397,6 @@ Taken together, these visualizations demonstrate that TROUT’s dataset lacks ke
 TROUT’s narrative of systemic fishing bias within COOTEFOO is **not substantiated** when assessed in the full context. The **omission of member sentiment**, especially those favoring tourism, **diminishes the credibility** of the accusation.
 :::
 
-
 ## 6.4 Question 4
 
 ::: {.callout-note title="The Question"}
@@ -1427,8 +1426,6 @@ Teddy was **explicitly accused by TROUT** of resisting tourism and favoring fish
 -   **Absent from FILAH**, indicating sampling bias
 
 -   Shows **contrasting portrayals** between datasets
-
-
 
 ### 6.4.3 📊 Teddy’s Activity Record Count
 
