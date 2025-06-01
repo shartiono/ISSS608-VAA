@@ -22,7 +22,7 @@ In this exercise, we explore [Mini-Challenge 2 (MC2)](https://vast-challenge.git
 
 Both groups claim the **Commission on Overseeing the Economic Future of Oceanus (COOTEFOO)** of bias in its support of development initiatives. As data analysts, our goal is to reconstruct an unbiased understanding of COOTEFOO’s activities and assess the validity of these accusations using data from both camps and a more complete combined dataset.
 
-## **1.1 Tasks and Questions:**
+## 1.1 Tasks and Questions:
 
 1.  Based on the datasets that TROUT & FILAH have provided, use visual analytics to determine if each group’s accusations are supported by their own record set. In other words, develop a visualization to highlight bias (if present) in TROUT & FILAHS datasets. Is there evidence of bias in the COOTEFOO member actions in either dataset?
 
@@ -141,7 +141,7 @@ glimpse(journalist)
 
 </details>
 
-## **3.2 Extracting the edges and nodes tables**
+## 3.2 Extracting the edges and nodes tables
 
 Next, `as_tibble()` of **tibble** package package is used to extract the nodes and links tibble data frames from each of the dataframe into two separate tibble dataframes called *nodes* and *edges* respectively.
 
