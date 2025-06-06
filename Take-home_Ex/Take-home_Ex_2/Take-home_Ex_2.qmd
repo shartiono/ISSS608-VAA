@@ -8,6 +8,7 @@ execute:
   eval: true
   echo: true
   warning: false
+  error: false
 ---
 
 # 1 Overview
@@ -331,7 +332,7 @@ Next, we will check the missing values in the dataset.
 
 <summary>Show the code</summary>
 
-```{r}
+```{r, eval=FALSE}
 
 # Filter to only columns with missing values
 miss_summary_nodes <- bind_rows(
@@ -933,7 +934,6 @@ TROUT, while including more members, emphasizes voices that are critical of tour
 These observations suggest that each dataset may reflect the priorities and framing choices of its source organization. However, the patterns of inclusion, omission, and sentiment warrant deeper exploration.
 
 To better understand the extent and implications of these biases, the subsequent questions (Q2–Q4) will integrate a more complete dataset and examine structural, geographic, and individual-level behavior in context.
-
 :::
 
 ## 6.2 Question 2
