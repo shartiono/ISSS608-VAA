@@ -2,4 +2,8 @@
 title: "About"
 ---
 
-Welcome to **ISSS608 Visual Analytics and Applications**. In this website, you will find my coursework prepared for this course.
+Welcome to **ISSS608 Visual Analytics and Applications**.
+
+In this website, you will find my coursework prepared for this course.
+
+![](images/clipboard-2310111102.png)
