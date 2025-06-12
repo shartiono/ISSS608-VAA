@@ -1,0 +1,14 @@
+---
+title: "Take-home Exercise 3"
+date: 2025-06-12
+date-modified: last-modified
+format: html
+editor: visual
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  error: false
+---
+
+## 

@@ -40,7 +40,9 @@ website:
       - text: "Take-Home Exercise 1B"
         href: "Take-home_Ex/Take-home_Ex_1B/Take-home_Ex01B.html" 
       - text: "Take-Home Exercise 2"
-        href: "Take-home_Ex/Take-home_Ex_2/Take-home_Ex_2.html"   
+        href: "Take-home_Ex/Take-home_Ex_2/Take-home_Ex_2.html" 
+      - text: "Take-Home Exercise 3"
+        href: "Take-home_Ex/Take-home_Ex_3/Take-home_Ex_3.html"   
     - text: "In-Class Exercise"
       menu: 
       - text: "In-Class Exercise 5"
