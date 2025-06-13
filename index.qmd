@@ -6,8 +6,6 @@ Welcome to **ISSS608 Visual Analytics and Applications**.
 
 In this website, you will find my coursework prepared for this course.
 
-The Reference materials used can be found in Prof Kam Tin Seong’s course Webpage.
-
-<https://isss608-ay2024-25apr.netlify.app/>
+The Reference materials used can be found in Prof Kam Tin Seong’s course Webpage: <https://isss608-ay2024-25apr.netlify.app/>
 
 ![](images/clipboard-3504240539.png){width="470" height="499"}

@@ -943,5 +943,19 @@
     "title": "About",
     "section": "",
     "text": "Welcome to ISSS608 Visual Analytics and Applications.\nIn this website, you will find my coursework prepared for this course."
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex_3/Take-home_Ex_3.html",
+    "href": "Take-home_Ex/Take-home_Ex_3/Take-home_Ex_3.html",
+    "title": "Take-home Exercise 3",
+    "section": "",
+    "text": "Prototyping is crucial\nPrototyping first may help keep you from investing far too much time for marginal gains.\nThe Art of UNIX Programming (Raymond 2003)\n\n\nIn this take-home exercise, we will select one of the module of the proposed Shiny application and complete the following tasks:\n\nTo evaluate and determine the necessary R packages needed for your Shiny application are supported in R CRAN,\nTo prepare and test the specific R codes can be run and returned the correct output as expected,\nTo determine the parameters and outputs that will be exposed on the Shiny applications, and\nTo select the appropriate Shiny UI components for exposing the parameters determine above."
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex_3/Take-home_Ex_3.html#the-task",
+    "href": "Take-home_Ex/Take-home_Ex_3/Take-home_Ex_3.html#the-task",
+    "title": "Take-home Exercise 3",
+    "section": "",
+    "text": "In this take-home exercise, we will select one of the module of the proposed Shiny application and complete the following tasks:\n\nTo evaluate and determine the necessary R packages needed for your Shiny application are supported in R CRAN,\nTo prepare and test the specific R codes can be run and returned the correct output as expected,\nTo determine the parameters and outputs that will be exposed on the Shiny applications, and\nTo select the appropriate Shiny UI components for exposing the parameters determine above."
   }
 ]
