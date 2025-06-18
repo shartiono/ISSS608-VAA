@@ -11,4 +11,86 @@ execute:
   error: false
 ---
 
-## 
+# **Prototyping Modules for Visual Analytics Shiny Application**
+
+> *"Prototyping first may help keep you from investing far too much time for marginal gains."*\
+> — *The Art of UNIX Programming (Raymond, 2003)*
+
+------------------------------------------------------------------------
+
+## 1. Project Overview
+
+This prototype continues from [Take-home Exercise 2](https://isss608-shar.netlify.app/take-home_ex/take-home_ex_2/take-home_ex_2), based on **Mini-Challenge 2 (MC2)** from the VAST Challenge 2025, which investigates claims of bias within the fictional government committee **COOTEFOO**, amid tensions between economic development and cultural preservation in Oceanus.
+
+Oceanus faces competing visions from:
+
+-   **Fishing is Living and Heritage (FILAH)** – preserving traditional fishing zones.
+-   **Tourism Raises OceanUs Together (TROUT)** – promoting tourism-led growth.
+
+Both groups have accused **COOTEFOO** of favoring the other. To investigate, we analyze:
+
+-   🟦 **FILAH.json** – records submitted by the pro-fishing group
+-   🟨 **TROUT.json** – records from the pro-tourism group
+-   🟩 **journalist.json** – independent reports to provide a neutral perspective
+-   🗺️ **oceanus_map.geojson** – official zoning map of Oceanus
+-   🛣️ **road_map.json** – road network infrastructure
+
+📝 *All datasets were provided through the official VAST Challenge MC2 instruction page and included in the exercise folder (`data/`).*
+
+We aim to build a **modular Shiny app prototype** that allows stakeholders to: 1. View which COOTEFOO members are most frequently discussed 2. Analyze the topics and sentiment associated with each 3. Compare bias across datasets 4. Explore geographic movement patterns
+
+This report outlines our **Quarto-based storyboard prototype**, which will be integrated into a future Shiny app.
+
+## 2. Required R Packages
+
+The following packages are used to support data wrangling, spatial analysis, network exploration, and interactive prototyping:
+
+-   **`tidyverse`**: Core data science suite (`dplyr`, `ggplot2`, `tidyr`, etc.)
+-   **`jsonlite`**: Read/write structured JSON data
+-   **`sf`**: Handle and visualize spatial vector data (simple features)
+-   **`lubridate`**: Manage and format date-time objects
+-   **`DT`**: Render interactive tables for HTML display
+-   **`shiny`**: Build interactive web applications
+-   **`visNetwork`**: Generate interactive network visualizations
+-   **`igraph`**: Perform network analysis (e.g., centrality, clusters)
+-   **`stringr`**: Handle and manipulate string data
+
+<details>
+
+<summary>Show the code</summary>
+
+```{r}
+
+pacman::p_load(tidyverse, jsonlite, sf, lubridate, DT, shiny, visNetwork, igraph, stringr, tidygraph)
+```
+
+</details>
+
+## 3. Data Import
+
+The following datasets are used in this prototype. These were provided as part of the VAST Challenge 2025 Mini-Challenge 2.
+
+-   `FILAH.json`: Records provided by the fishing advocacy group
+-   `TROUT.json`: Records from the tourism advocacy group
+-   `journalist.json`: Independent data contributed by journalists
+-   `oceanus_map.geojson`: Oceanus spatial zoning map
+-   `road_map.json`: Road network of Oceanus
+
+<details>
+
+<summary>📥 Load JSON and GeoJSON Files</summary>
+
+```{r}
+# Load JSON-based knowledge graphs
+filah <- jsonlite::fromJSON("data/FILAH.json")
+trout <- jsonlite::fromJSON("data/TROUT.json")
+journalist <- jsonlite::fromJSON("data/journalist.json")
+
+# Load spatial files
+oceanus_map <- sf::st_read("data/oceanus_map.geojson")
+road_map <- jsonlite::fromJSON("data/road_map.json", simplifyDataFrame = TRUE)
+
+```
+
+</details>
+
