@@ -343,7 +343,8 @@ This slide shows you how to install a R package which is not available in cran.
 1.  If this is the first time you install a package from github, you should install *devtools* package by using the code below or else you can skip this step.
 
 ```{r}
-install.packages("devtools")
+install.packages("devtools", repos = "https://cloud.r-project.org")
+
 ```
 
 2.  Next, you will load the devtools library and install the package found in github by using the codes below.
