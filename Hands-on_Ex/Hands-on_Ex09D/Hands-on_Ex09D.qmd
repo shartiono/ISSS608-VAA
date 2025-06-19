@@ -2,7 +2,9 @@
 title: "Hands-on Exercise 09D"
 date: 2025-06-18
 date-modified: last-modified
-format: html
+format:
+  html:
+    embed-resources: true
 editor: visual
 execute: 
   eval: true
