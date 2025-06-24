@@ -42,7 +42,9 @@ website:
       - text: "Hands-on Exercise 9D"
         href: "Hands-on_Ex/Hands-on_Ex09D/Hands-on_Ex09D.html"
       - text: "Hands-on Exercise 9E"
-        href: "Hands-on_Ex/Hands-on_Ex09E/Hands-on_Ex09E.html"   
+        href: "Hands-on_Ex/Hands-on_Ex09E/Hands-on_Ex09E.html" 
+      - text: "Hands-on Exercise 10"
+        href: "Hands-on_Ex/Hands-on_Ex10/Hands-on_Ex10.html"   
         
     - text: "Take-Home Exercise"
       menu: 
